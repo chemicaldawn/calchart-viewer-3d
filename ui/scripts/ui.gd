@@ -3,7 +3,7 @@ extends Control
 @onready
 var agent_director = $"../Director/Agent Director"
 @onready
-var slider = get_node("Navbar/Scrubber/Slider")
+var slider = $"Viewer Controls/Navbar/Scrubber/Slider"
 
 var input = false
 var restore_active_playback = false

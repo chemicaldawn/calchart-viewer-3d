@@ -4,11 +4,11 @@ extends HTTPRequest
 var loader = $"../Loader"
 
 @onready
-var show_list = $"../../UI/Main Menu/Anchor/Show List"
+var show_list: ItemList = $"../../UI/Main Menu/Content/Show List"
 @onready
 var audio_player = $"../../World/AudioStreamPlayer"
 @onready
-var info : Label = $"../../UI/Main Menu/Anchor/Info"
+var info : Label = $"../../UI/Main Menu/Content/Info"
 
 var shows = {}
 var audio_url = ""
@@ -52,7 +52,7 @@ func _on_request_completed(result, response_code, headers, body):
 				request(audio_url)
 				
 				loader.load_show(json)
-				$"../../UI/Main Menu/AnimationPlayer".play("transition")
+				$"../../UI/Main Menu/Main Menu Animator".play("transition")
 				
 		"audio/mpeg":
 			

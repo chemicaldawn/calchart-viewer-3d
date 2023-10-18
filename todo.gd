@@ -1,11 +1,8 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# TODO: Fix Music Sync Bug
+# TODO: Implement Gate Turns
+# TODO: Fix Follow the Leader Crash Bug (?)
+# TODO: Improve Settings Menu
+# TODO: Implement configuration property
+# TODO: First-person rotation

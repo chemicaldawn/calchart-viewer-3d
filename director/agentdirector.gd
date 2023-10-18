@@ -16,20 +16,20 @@ var agent_container = $"../../World/Agents"
 var movement_controller = $"../Movement Controller"
 
 @onready
-var play_icon : TextureRect = $"../../UI/Navbar/Controls/Play/Play Icon"
+var play_icon : TextureRect = $"../../UI/Viewer Controls/Navbar/Controls/Play/Play Icon"
 var play_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://ui/textures/play.png"))
 var pause_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://ui/textures/pause.png"))
 
 @onready
-var sheet_label : Label = $"../../UI/Navbar/Stunt Sheet"
+var sheet_label : Label = $"../../UI/Viewer Controls/Navbar/Stunt Sheet"
 @onready
-var beat_label : Label = $"../../UI/Navbar/Beat"
+var beat_label : Label = $"../../UI/Viewer Controls/Navbar/Beat"
 @onready
-var slider : Slider = $"../../UI/Navbar/Scrubber/Slider"
+var slider : Slider = $"../../UI/Viewer Controls/Navbar/Scrubber/Slider"
 @onready
 var audio_player = $"../../World/AudioStreamPlayer"
 @onready
-var dot_highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Menu/Options/Highlight/OptionButton"
+var dot_highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Background/Options/Highlight/OptionButton"
 
 func play():
 	

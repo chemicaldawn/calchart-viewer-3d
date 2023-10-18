@@ -96,3 +96,5 @@ func change_mode(mode : CalChart.CAMERA_MODE):
 			agent_director.highlighted_agent.visible = false
 	
 	camera_mode = mode
+
+

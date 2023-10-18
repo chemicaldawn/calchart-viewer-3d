@@ -85,7 +85,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor:modulate")
+tracks/0/path = NodePath("../Content:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -97,7 +97,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/Show List:position")
+tracks/1/path = NodePath("../Content/Show List:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -109,7 +109,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Toolbar/Title Bar:modulate")
+tracks/2/path = NodePath("../../Viewer Controls/Toolbar/Title Bar:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -149,7 +149,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor:modulate")
+tracks/0/path = NodePath("../Content:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -161,7 +161,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/Show List:position")
+tracks/1/path = NodePath("../Content/Show List:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -265,17 +265,24 @@ offset_right = 1.91992
 offset_bottom = 6.47998
 action_mode = 0
 
-[node name="Toolbar" type="ColorRect" parent="UI"]
+[node name="Viewer Controls" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Toolbar" type="ColorRect" parent="UI/Viewer Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_bottom = 120.0
 color = Color(0.160784, 0.168627, 0.192157, 1)
 
-[node name="Title Bar" type="Control" parent="UI/Toolbar"]
+[node name="Title Bar" type="Control" parent="UI/Viewer Controls/Toolbar"]
 anchors_preset = 0
 
-[node name="Show Name" type="Label" parent="UI/Toolbar/Title Bar"]
+[node name="Show Name" type="Label" parent="UI/Viewer Controls/Toolbar/Title Bar"]
 layout_mode = 0
 offset_left = 95.0
 offset_top = 20.0
@@ -284,7 +291,7 @@ offset_bottom = 82.0
 text = "Show Name"
 label_settings = SubResource("LabelSettings_f23hy")
 
-[node name="Year" type="Label" parent="UI/Toolbar/Title Bar"]
+[node name="Year" type="Label" parent="UI/Viewer Controls/Toolbar/Title Bar"]
 modulate = Color(1, 1, 1, 0.623529)
 layout_mode = 0
 offset_left = 93.0
@@ -294,7 +301,7 @@ offset_bottom = 115.0
 text = "2023"
 label_settings = SubResource("LabelSettings_8j0sq")
 
-[node name="Highstepper" type="TextureRect" parent="UI/Toolbar/Title Bar"]
+[node name="Highstepper" type="TextureRect" parent="UI/Viewer Controls/Toolbar/Title Bar"]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 21.0
@@ -303,7 +310,7 @@ offset_bottom = 97.0
 texture = ExtResource("7_84ki6")
 expand_mode = 1
 
-[node name="View Options" type="HBoxContainer" parent="UI/Toolbar"]
+[node name="View Options" type="HBoxContainer" parent="UI/Viewer Controls/Toolbar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -314,13 +321,13 @@ offset_bottom = 120.0
 grow_horizontal = 0
 script = ExtResource("8_rvqg6")
 
-[node name="Free View" type="Control" parent="UI/Toolbar/View Options"]
+[node name="Free View" type="Control" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 script = ExtResource("9_87rpc")
 state = 0
 
-[node name="Icon" type="TextureRect" parent="UI/Toolbar/View Options/Free View"]
+[node name="Icon" type="TextureRect" parent="UI/Viewer Controls/Toolbar/View Options/Free View"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 15.0
@@ -329,7 +336,7 @@ offset_bottom = 75.0
 texture = ExtResource("10_sfkij")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Toolbar/View Options/Free View"]
+[node name="Label" type="Label" parent="UI/Viewer Controls/Toolbar/View Options/Free View"]
 layout_mode = 0
 offset_top = 75.0
 offset_right = 120.0
@@ -337,7 +344,7 @@ offset_bottom = 101.0
 text = "Free View"
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="UI/Toolbar/View Options/Free View"]
+[node name="Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/View Options/Free View"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -345,13 +352,13 @@ offset_right = 100.0
 offset_bottom = 100.0
 mouse_default_cursor_shape = 2
 
-[node name="Spectator View" type="Control" parent="UI/Toolbar/View Options"]
+[node name="Spectator View" type="Control" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 script = ExtResource("9_87rpc")
 camera_mode = 1
 
-[node name="Icon" type="TextureRect" parent="UI/Toolbar/View Options/Spectator View"]
+[node name="Icon" type="TextureRect" parent="UI/Viewer Controls/Toolbar/View Options/Spectator View"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 15.0
@@ -360,7 +367,7 @@ offset_bottom = 75.0
 texture = ExtResource("11_e44ms")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Toolbar/View Options/Spectator View"]
+[node name="Label" type="Label" parent="UI/Viewer Controls/Toolbar/View Options/Spectator View"]
 layout_mode = 0
 offset_top = 69.0
 offset_right = 120.0
@@ -370,7 +377,7 @@ View"
 label_settings = SubResource("LabelSettings_1mtp0")
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="UI/Toolbar/View Options/Spectator View"]
+[node name="Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/View Options/Spectator View"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -378,13 +385,13 @@ offset_right = 100.0
 offset_bottom = 100.0
 mouse_default_cursor_shape = 2
 
-[node name="Topdown View" type="Control" parent="UI/Toolbar/View Options"]
+[node name="Topdown View" type="Control" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 script = ExtResource("9_87rpc")
 camera_mode = 2
 
-[node name="Icon" type="TextureRect" parent="UI/Toolbar/View Options/Topdown View"]
+[node name="Icon" type="TextureRect" parent="UI/Viewer Controls/Toolbar/View Options/Topdown View"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 15.0
@@ -393,7 +400,7 @@ offset_bottom = 75.0
 texture = ExtResource("12_0lt53")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Toolbar/View Options/Topdown View"]
+[node name="Label" type="Label" parent="UI/Viewer Controls/Toolbar/View Options/Topdown View"]
 layout_mode = 0
 offset_top = 69.0
 offset_right = 120.0
@@ -403,7 +410,7 @@ View"
 label_settings = SubResource("LabelSettings_1mtp0")
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="UI/Toolbar/View Options/Topdown View"]
+[node name="Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/View Options/Topdown View"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -411,20 +418,20 @@ offset_right = 100.0
 offset_bottom = 100.0
 mouse_default_cursor_shape = 2
 
-[node name="Divider" type="ColorRect" parent="UI/Toolbar/View Options"]
+[node name="Divider" type="ColorRect" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(2, 80)
 layout_mode = 2
 size_flags_vertical = 4
 color = Color(0.09375, 0.0976563, 0.113281, 1)
 
-[node name="First-Person View" type="Control" parent="UI/Toolbar/View Options"]
+[node name="First-Person View" type="Control" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 script = ExtResource("9_87rpc")
 camera_mode = 3
 state = 2
 
-[node name="Icon" type="TextureRect" parent="UI/Toolbar/View Options/First-Person View"]
+[node name="Icon" type="TextureRect" parent="UI/Viewer Controls/Toolbar/View Options/First-Person View"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 15.0
@@ -433,7 +440,7 @@ offset_bottom = 75.0
 texture = ExtResource("13_22mpu")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Toolbar/View Options/First-Person View"]
+[node name="Label" type="Label" parent="UI/Viewer Controls/Toolbar/View Options/First-Person View"]
 layout_mode = 0
 offset_top = 69.0
 offset_right = 120.0
@@ -443,7 +450,7 @@ View"
 label_settings = SubResource("LabelSettings_1mtp0")
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="UI/Toolbar/View Options/First-Person View"]
+[node name="Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/View Options/First-Person View"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -451,14 +458,14 @@ offset_right = 100.0
 offset_bottom = 100.0
 mouse_default_cursor_shape = 2
 
-[node name="Third-Person View" type="Control" parent="UI/Toolbar/View Options"]
+[node name="Third-Person View" type="Control" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 script = ExtResource("9_87rpc")
 camera_mode = 4
 state = 2
 
-[node name="Icon" type="TextureRect" parent="UI/Toolbar/View Options/Third-Person View"]
+[node name="Icon" type="TextureRect" parent="UI/Viewer Controls/Toolbar/View Options/Third-Person View"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 15.0
@@ -467,7 +474,7 @@ offset_bottom = 75.0
 texture = ExtResource("14_wqk1x")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Toolbar/View Options/Third-Person View"]
+[node name="Label" type="Label" parent="UI/Viewer Controls/Toolbar/View Options/Third-Person View"]
 layout_mode = 0
 offset_top = 69.0
 offset_right = 120.0
@@ -477,7 +484,7 @@ View"
 label_settings = SubResource("LabelSettings_1mtp0")
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="UI/Toolbar/View Options/Third-Person View"]
+[node name="Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/View Options/Third-Person View"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -485,20 +492,20 @@ offset_right = 100.0
 offset_bottom = 100.0
 mouse_default_cursor_shape = 2
 
-[node name="Divider2" type="ColorRect" parent="UI/Toolbar/View Options"]
+[node name="Divider2" type="ColorRect" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(2, 80)
 layout_mode = 2
 size_flags_vertical = 4
 color = Color(0.09375, 0.0976563, 0.113281, 1)
 
-[node name="Cal Band Simulator" type="Control" parent="UI/Toolbar/View Options"]
+[node name="Cal Band Simulator" type="Control" parent="UI/Viewer Controls/Toolbar/View Options"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 script = ExtResource("9_87rpc")
 camera_mode = 2
 state = 2
 
-[node name="Icon" type="TextureRect" parent="UI/Toolbar/View Options/Cal Band Simulator"]
+[node name="Icon" type="TextureRect" parent="UI/Viewer Controls/Toolbar/View Options/Cal Band Simulator"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 15.0
@@ -507,7 +514,7 @@ offset_bottom = 75.0
 texture = ExtResource("15_ipkdy")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Toolbar/View Options/Cal Band Simulator"]
+[node name="Label" type="Label" parent="UI/Viewer Controls/Toolbar/View Options/Cal Band Simulator"]
 layout_mode = 0
 offset_top = 69.0
 offset_right = 120.0
@@ -517,7 +524,7 @@ Simulator"
 label_settings = SubResource("LabelSettings_1mtp0")
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="UI/Toolbar/View Options/Cal Band Simulator"]
+[node name="Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/View Options/Cal Band Simulator"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -525,7 +532,7 @@ offset_right = 100.0
 offset_bottom = 100.0
 mouse_default_cursor_shape = 2
 
-[node name="Navbar" type="ColorRect" parent="UI"]
+[node name="Navbar" type="ColorRect" parent="UI/Viewer Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -534,7 +541,7 @@ anchor_bottom = 1.0
 offset_top = -120.0
 color = Color(0.160784, 0.168627, 0.192157, 1)
 
-[node name="Stunt Sheet" type="Label" parent="UI/Navbar"]
+[node name="Stunt Sheet" type="Label" parent="UI/Viewer Controls/Navbar"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 21.0
@@ -543,7 +550,7 @@ offset_bottom = 63.0
 text = "Stunt Sheet "
 label_settings = SubResource("LabelSettings_expfl")
 
-[node name="Beat" type="Label" parent="UI/Navbar"]
+[node name="Beat" type="Label" parent="UI/Viewer Controls/Navbar"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 64.0
@@ -552,14 +559,14 @@ offset_bottom = 106.0
 text = "Beat"
 label_settings = SubResource("LabelSettings_8j0sq")
 
-[node name="Scrubber" type="Control" parent="UI/Navbar"]
+[node name="Scrubber" type="Control" parent="UI/Viewer Controls/Navbar"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 
-[node name="Slider" type="HSlider" parent="UI/Navbar/Scrubber"]
+[node name="Slider" type="HSlider" parent="UI/Viewer Controls/Navbar/Scrubber"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -572,7 +579,7 @@ step = 0.01
 value = 1.0
 scrollable = false
 
-[node name="Controls" type="Control" parent="UI/Navbar"]
+[node name="Controls" type="Control" parent="UI/Viewer Controls/Navbar"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -581,7 +588,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="ColorRect" parent="UI/Navbar/Controls"]
+[node name="Play" type="ColorRect" parent="UI/Viewer Controls/Navbar/Controls"]
 material = SubResource("ShaderMaterial_lxmka")
 layout_mode = 1
 anchors_preset = -1
@@ -592,7 +599,7 @@ offset_left = -60.0
 offset_right = 60.0
 color = Color(0.0941176, 0.0980392, 0.113725, 1)
 
-[node name="Play Icon" type="TextureRect" parent="UI/Navbar/Controls/Play"]
+[node name="Play Icon" type="TextureRect" parent="UI/Viewer Controls/Navbar/Controls/Play"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -606,7 +613,7 @@ grow_vertical = 2
 texture = ExtResource("18_53c3i")
 expand_mode = 1
 
-[node name="Step Forward" type="TextureButton" parent="UI/Navbar/Controls"]
+[node name="Step Forward" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -615,11 +622,12 @@ offset_left = 90.0
 offset_top = -15.0
 offset_right = 120.0
 offset_bottom = 15.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("18_53c3i")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Step Backward" type="TextureButton" parent="UI/Navbar/Controls"]
+[node name="Step Backward" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -628,12 +636,13 @@ offset_left = -120.0
 offset_top = -15.0
 offset_right = -90.0
 offset_bottom = 15.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("18_53c3i")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Skip Backward" type="TextureButton" parent="UI/Navbar/Controls"]
+[node name="Skip Backward" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -642,12 +651,13 @@ offset_left = -180.0
 offset_top = -15.0
 offset_right = -150.0
 offset_bottom = 15.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("19_6a6cn")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Skip Forward" type="TextureButton" parent="UI/Navbar/Controls"]
+[node name="Skip Forward" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -656,6 +666,7 @@ offset_left = 150.0
 offset_top = -15.0
 offset_right = 180.0
 offset_bottom = 15.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("19_6a6cn")
 ignore_texture_size = true
 stretch_mode = 0
@@ -669,7 +680,7 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Menu" type="ColorRect" parent="UI/Tab Menu"]
+[node name="Background" type="ColorRect" parent="UI/Tab Menu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -682,18 +693,18 @@ grow_horizontal = 0
 color = Color(0.0941176, 0.0980392, 0.113725, 1)
 script = ExtResource("20_ork4b")
 
-[node name="Tab Animator" type="AnimationPlayer" parent="UI/Tab Menu/Menu"]
+[node name="Tab Animator" type="AnimationPlayer" parent="UI/Tab Menu/Background"]
 libraries = {
 "": SubResource("AnimationLibrary_xsdqm")
 }
 
-[node name="Button" type="ColorRect" parent="UI/Tab Menu/Menu"]
+[node name="Button" type="ColorRect" parent="UI/Tab Menu/Background"]
 layout_mode = 0
 offset_left = -60.0
 offset_bottom = 60.0
 color = Color(0.0941176, 0.0980392, 0.113725, 1)
 
-[node name="TextureButton" type="TextureButton" parent="UI/Tab Menu/Menu/Button"]
+[node name="TextureButton" type="TextureButton" parent="UI/Tab Menu/Background/Button"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -704,17 +715,17 @@ texture_normal = ExtResource("21_dywut")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Options" type="VBoxContainer" parent="UI/Tab Menu/Menu"]
+[node name="Options" type="VBoxContainer" parent="UI/Tab Menu/Background"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 840.0
 grow_horizontal = 2
 
-[node name="Highlight" type="Control" parent="UI/Tab Menu/Menu/Options"]
+[node name="Highlight" type="Control" parent="UI/Tab Menu/Background/Options"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Tab Menu/Menu/Options/Highlight"]
+[node name="Label" type="Label" parent="UI/Tab Menu/Background/Options/Highlight"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -723,7 +734,7 @@ offset_bottom = 60.0
 text = "Highlight My Dot"
 label_settings = SubResource("LabelSettings_xwrag")
 
-[node name="OptionButton" type="OptionButton" parent="UI/Tab Menu/Menu/Options/Highlight"]
+[node name="OptionButton" type="OptionButton" parent="UI/Tab Menu/Background/Options/Highlight"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 65.0
@@ -738,7 +749,14 @@ allow_reselect = true
 popup/item_0/text = "None"
 popup/item_0/id = 0
 
-[node name="Main Menu" type="ColorRect" parent="UI"]
+[node name="Main Menu" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="UI/Main Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -747,7 +765,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.160784, 0.168627, 0.192157, 1)
 
-[node name="Anchor" type="Control" parent="UI/Main Menu"]
+[node name="Content" type="Control" parent="UI/Main Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -757,7 +775,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Name" type="Label" parent="UI/Main Menu/Anchor"]
+[node name="Name" type="Label" parent="UI/Main Menu/Content"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 24.025
@@ -771,7 +789,7 @@ text = "CalChart Viewer 3D"
 label_settings = SubResource("LabelSettings_4ofsf")
 horizontal_alignment = 1
 
-[node name="Info" type="Label" parent="UI/Main Menu/Anchor"]
+[node name="Info" type="Label" parent="UI/Main Menu/Content"]
 modulate = Color(1, 1, 1, 0.764706)
 layout_mode = 0
 offset_left = -240.0
@@ -782,7 +800,7 @@ text = "Loading shows..."
 label_settings = SubResource("LabelSettings_4mjcl")
 horizontal_alignment = 1
 
-[node name="Highstepper" type="TextureRect" parent="UI/Main Menu/Anchor"]
+[node name="Highstepper" type="TextureRect" parent="UI/Main Menu/Content"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -796,7 +814,7 @@ offset_bottom = -86.0
 texture = ExtResource("7_84ki6")
 expand_mode = 1
 
-[node name="Show List" type="ItemList" parent="UI/Main Menu/Anchor"]
+[node name="Show List" type="ItemList" parent="UI/Main Menu/Content"]
 layout_mode = 0
 offset_left = -240.0
 offset_top = 45.0
@@ -805,7 +823,8 @@ offset_bottom = 365.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("4_5a274")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Main Menu"]
+[node name="Main Menu Animator" type="AnimationPlayer" parent="UI/Main Menu"]
+root_node = NodePath("../Background")
 libraries = {
 "": SubResource("AnimationLibrary_eo7hj")
 }
@@ -833,14 +852,14 @@ transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 
 transform = Transform3D(0.918021, 0.0965321, -0.384602, 0.390708, -0.0545816, 0.918895, 0.0677106, -0.993832, -0.0878229, -16.5302, 63.7299, -23.8063)
 
 [connection signal="pressed" from="UI/Focus Detector" to="Director/Movement Controller" method="_on_focus_detector_pressed"]
-[connection signal="drag_ended" from="UI/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_ended"]
-[connection signal="drag_started" from="UI/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_started"]
-[connection signal="value_changed" from="UI/Navbar/Scrubber/Slider" to="UI" method="_on_slider_value_changed"]
-[connection signal="pressed" from="UI/Navbar/Controls/Step Forward" to="World/Agents" method="_on_step_forward_pressed"]
-[connection signal="pressed" from="UI/Navbar/Controls/Step Backward" to="World/Agents" method="_on_step_backward_pressed"]
-[connection signal="pressed" from="UI/Navbar/Controls/Skip Backward" to="World/Agents" method="_on_skip_backward_pressed"]
-[connection signal="pressed" from="UI/Navbar/Controls/Skip Forward" to="World/Agents" method="_on_skip_forward_pressed"]
-[connection signal="pressed" from="UI/Tab Menu/Menu/Button/TextureButton" to="UI/Tab Menu/Menu" method="_on_texture_button_pressed"]
-[connection signal="item_selected" from="UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="UI/Toolbar/View Options" method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="UI/Main Menu/Anchor/Show List" to="Director/Network" method="_on_show_list_item_selected"]
+[connection signal="drag_ended" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_ended"]
+[connection signal="drag_started" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_started"]
+[connection signal="value_changed" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_value_changed"]
+[connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Step Forward" to="Director/Agent Director" method="_on_step_forward_pressed"]
+[connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Step Backward" to="Director/Agent Director" method="_on_step_backward_pressed"]
+[connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Skip Backward" to="Director/Agent Director" method="_on_skip_backward_pressed"]
+[connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Skip Forward" to="Director/Agent Director" method="_on_skip_forward_pressed"]
+[connection signal="pressed" from="UI/Tab Menu/Background/Button/TextureButton" to="UI/Tab Menu/Background" method="_on_texture_button_pressed"]
+[connection signal="item_selected" from="UI/Tab Menu/Background/Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="UI/Tab Menu/Background/Options/Highlight/OptionButton" to="UI/Viewer Controls/Toolbar/View Options" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="Director/Network" method="_on_show_list_item_selected"]

@@ -18,14 +18,14 @@ var DEFAULT_MODULATE = {
 }
 
 @onready
-var movement_controller = $"../../../../Director/Movement Controller"
+var movement_controller = $"../../../../../Director/Movement Controller"
 
 @onready
 var button = $Button
 @onready
 var view_options = $".."
 @onready
-var camera = $"../../../../World/Camera"
+var camera = $"../../../../../World/Camera"
 
 @export
 var camera_mode : CalChart.CAMERA_MODE = CalChart.CAMERA_MODE.FREE

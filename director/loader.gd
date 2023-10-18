@@ -7,13 +7,13 @@ var agent_director = $"../Agent Director"
 @onready
 var agent_container = $"../../World/Agents"
 @onready
-var show_label = $"../../UI/Toolbar/Title Bar/Show Name"
+var show_label = $"../../UI/Viewer Controls/Toolbar/Title Bar/Show Name"
 @onready
-var year_label = $"../../UI/Toolbar/Title Bar/Year"
+var year_label = $"../../UI/Viewer Controls/Toolbar/Title Bar/Year"
 @onready
-var slider : Slider = $"../../UI/Navbar/Scrubber/Slider"
+var slider : Slider = $"../../UI/Viewer Controls/Navbar/Scrubber/Slider"
 @onready
-var highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Menu/Options/Highlight/OptionButton"
+var highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Background/Options/Highlight/OptionButton"
 
 func load_show(data_recieved):
 	
