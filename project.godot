@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.1", "GL Compatibility")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.160784, 0.168627, 0.192157, 1)
 boot_splash/show_image=false
-config/icon="res://texture/highstepper.png"
+config/icon="res://ui/textures/highstepper.png"
 
 [autoload]
 

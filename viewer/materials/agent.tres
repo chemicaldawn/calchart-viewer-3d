@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bxg4oh4c4ru8i"]
-
-[ext_resource type="Material" uid="uid://7lnavxnie6hn" path="res://viewer/materials/outline.material" id="1_3jxfg"]
-
-[resource]
-next_pass = ExtResource("1_3jxfg")
-metallic_specular = 0.0
-roughness = 0.0

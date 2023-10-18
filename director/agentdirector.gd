@@ -17,8 +17,8 @@ var movement_controller = $"../Movement Controller"
 
 @onready
 var play_icon : TextureRect = $"../../UI/Navbar/Controls/Play/Play Icon"
-var play_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://texture/play.png"))
-var pause_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://texture/pause.png"))
+var play_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://ui/textures/play.png"))
+var pause_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://ui/textures/pause.png"))
 
 @onready
 var sheet_label : Label = $"../../UI/Navbar/Stunt Sheet"

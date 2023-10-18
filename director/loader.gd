@@ -1,6 +1,6 @@
 extends Node
 
-var Agent = preload("res://viewer/agent/agent.tscn")
+var Agent = preload("res://world/scenes/agent.tscn")
 
 @onready
 var agent_director = $"../Agent Director"
