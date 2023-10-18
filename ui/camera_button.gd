@@ -18,11 +18,14 @@ var DEFAULT_MODULATE = {
 }
 
 @onready
+var movement_controller = $"../../../../Director/Movement Controller"
+
+@onready
 var button = $Button
 @onready
 var view_options = $".."
 @onready
-var camera = $"../../../../Camera"
+var camera = $"../../../../World/Camera"
 
 @export
 var camera_mode : CalChart.CAMERA_MODE = CalChart.CAMERA_MODE.FREE
@@ -55,7 +58,7 @@ func _on_button_pressed():
 		self.state = STATE.SELECTED
 		self.modulate = selected
 		
-		camera.change_mode(self.camera_mode)
+		movement_controller.change_mode(self.camera_mode)
 	
 func clear_buttons():
 	for child in view_options.get_children():

@@ -1,11 +1,14 @@
 extends HTTPRequest
 
 @onready
-var show_list = $"../../Viewer/UI/Main Menu/Anchor/Show List"
+var loader = $"../Loader"
+
 @onready
-var audio_player = $"../../Viewer/AudioStreamPlayer"
+var show_list = $"../../UI/Main Menu/Anchor/Show List"
 @onready
-var info : Label = $"../../Viewer/UI/Main Menu/Anchor/Info"
+var audio_player = $"../../World/AudioStreamPlayer"
+@onready
+var info : Label = $"../../UI/Main Menu/Anchor/Info"
 
 var shows = {}
 var audio_url = ""
@@ -48,8 +51,8 @@ func _on_request_completed(result, response_code, headers, body):
 				set_download_file("user://audio.mp3")
 				request(audio_url)
 				
-				$"../Loader".load_show(json)
-				$"../../Viewer/UI/Main Menu/AnimationPlayer".play("transition")
+				loader.load_show(json)
+				$"../../UI/Main Menu/AnimationPlayer".play("transition")
 				
 		"audio/mpeg":
 			

@@ -832,7 +832,7 @@ script = ExtResource("21_h38bp")
 [node name="Movement Controller" type="Node" parent="Director"]
 script = ExtResource("22_1bkpa")
 
-[connection signal="pressed" from="UI/Focus Detector" to="Director/Movement Controller" method="_on_focus_detector_pressed"]
+[connection signal="pressed" from="UI/Focus Detector" to="World/Camera" method="_on_focus_detector_pressed"]
 [connection signal="drag_ended" from="UI/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_ended"]
 [connection signal="drag_started" from="UI/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_started"]
 [connection signal="value_changed" from="UI/Navbar/Scrubber/Slider" to="UI" method="_on_slider_value_changed"]
@@ -841,6 +841,6 @@ script = ExtResource("22_1bkpa")
 [connection signal="pressed" from="UI/Navbar/Controls/Skip Backward" to="World/Agents" method="_on_skip_backward_pressed"]
 [connection signal="pressed" from="UI/Navbar/Controls/Skip Forward" to="World/Agents" method="_on_skip_forward_pressed"]
 [connection signal="pressed" from="UI/Tab Menu/Menu/Button/TextureButton" to="UI/Tab Menu/Menu" method="_on_texture_button_pressed"]
+[connection signal="item_selected" from="UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="World/Agents" method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="UI/Toolbar/View Options" method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="UI/Main Menu/Anchor/Show List" to="Director/Network" method="_on_show_list_item_selected"]

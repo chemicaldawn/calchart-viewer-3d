@@ -1,7 +1,9 @@
-extends Camera3D
+extends Node
 
 @onready
-var field = $"../Field"
+var camera : Camera3D = $"../../World/Camera"
+@onready
+var agent_director = $"../Agent Director"
 
 var speed_scalar = 30
 var angular_scalar = 0.001
@@ -9,8 +11,10 @@ var angular_scalar = 0.001
 var camera_mode : CalChart.CAMERA_MODE = CalChart.CAMERA_MODE.FREE
 var mouse_locked = false
 
-var free_view_position : Vector3 = self.position
-var free_view_rotation : Vector3 = self.rotation
+@onready
+var free_view_position : Vector3 = camera.position
+@onready
+var free_view_rotation : Vector3 = camera.rotation
 
 func _process(delta):
 	
@@ -34,23 +38,23 @@ func _process(delta):
 			vertical_scalar -= 1
 			
 		planar_vector = planar_vector.normalized()
-		planar_vector = planar_vector.rotated(-self.rotation.y)
+		planar_vector = planar_vector.rotated(-camera.rotation.y)
 
-		self.position.x += planar_vector.x * speed_scalar * delta
-		self.position.z += planar_vector.y * speed_scalar * delta
+		camera.position.x += planar_vector.x * speed_scalar * delta
+		camera.position.z += planar_vector.y * speed_scalar * delta
 		
-		self.position.y += vertical_scalar * speed_scalar * delta
+		camera.position.y += vertical_scalar * speed_scalar * delta
 		
 	if (camera_mode == CalChart.CAMERA_MODE.FIRSTPERSON):
-		self.position = field.highlighted_agent.position + Vector3(0,1.7,0)
+		camera.position = agent_director.highlighted_agent.position + Vector3(0,1.7,0)
 		#self.rotation = field.highlighted_agent.rotation
 	
 func _input(event):
 	if(mouse_locked):
 		if((camera_mode == CalChart.CAMERA_MODE.FREE) || (camera_mode == CalChart.CAMERA_MODE.SPECTATOR) || (camera_mode == CalChart.CAMERA_MODE.FIRSTPERSON)):
 			if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-				self.rotation.x -= event.relative.y * angular_scalar
-				self.rotation.y -= event.relative.x * angular_scalar
+				camera.rotation.x -= event.relative.y * angular_scalar
+				camera.rotation.y -= event.relative.x * angular_scalar
 			
 		if(Input.is_action_just_pressed("Break Cursor")):
 			
@@ -64,12 +68,12 @@ func _on_focus_detector_pressed():
 
 func change_mode(mode : CalChart.CAMERA_MODE):
 	
-	if(field.highlighted_agent):
-		field.highlighted_agent.visible = true
+	if(agent_director.highlighted_agent):
+		agent_director.highlighted_agent.visible = true
 	
 	if(camera_mode == CalChart.CAMERA_MODE.FREE):
-		free_view_position = self.position
-		free_view_rotation = self.rotation
+		free_view_position = camera.position
+		free_view_rotation = camera.rotation
 		
 		print(free_view_position)
 		print(free_view_rotation)
@@ -77,18 +81,18 @@ func change_mode(mode : CalChart.CAMERA_MODE):
 	match mode:
 		
 		CalChart.CAMERA_MODE.FREE:
-			self.position = free_view_position
-			self.rotation = free_view_rotation
+			camera.position = free_view_position
+			camera.rotation = free_view_rotation
 			
 		CalChart.CAMERA_MODE.SPECTATOR:
-			self.position = Vector3(80,40,100)
-			self.rotation = Vector3(-2*PI/9,0,0)
+			camera.position = Vector3(80,40,100)
+			camera.rotation = Vector3(-2*PI/9,0,0)
 			
 		CalChart.CAMERA_MODE.TOPDOWN:
-			self.position = Vector3(80,80,42.5)
-			self.rotation = Vector3(-PI/2,0,0)
+			camera.position = Vector3(80,80,42.5)
+			camera.rotation = Vector3(-PI/2,0,0)
 			
 		CalChart.CAMERA_MODE.FIRSTPERSON:
-			field.highlighted_agent.visible = false
+			agent_director.highlighted_agent.visible = false
 	
 	camera_mode = mode

@@ -3,15 +3,17 @@ extends Node
 var Agent = preload("res://viewer/agent/agent.tscn")
 
 @onready
-var Field = self.get_parent().get_parent().get_node("Viewer/Field")
+var agent_director = $"../Agent Director"
 @onready
-var show_label = self.get_parent().get_parent().get_node("Viewer/UI/Toolbar/Title Bar/Show Name")
+var agent_container = $"../../World/Agents"
 @onready
-var year_label = self.get_parent().get_parent().get_node("Viewer/UI/Toolbar/Title Bar/Year")
+var show_label = $"../../UI/Toolbar/Title Bar/Show Name"
 @onready
-var slider : Slider = self.get_parent().get_parent().get_node("Viewer/UI/Navbar/Scrubber/Slider")
+var year_label = $"../../UI/Toolbar/Title Bar/Year"
 @onready
-var highlight_dropdown : OptionButton = $"../../Viewer/UI/Tab Menu/Menu/Options/Highlight/OptionButton"
+var slider : Slider = $"../../UI/Navbar/Scrubber/Slider"
+@onready
+var highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Menu/Options/Highlight/OptionButton"
 
 func load_show(data_recieved):
 	
@@ -20,8 +22,8 @@ func load_show(data_recieved):
 	create_show_objects(data_recieved["viewer"]["show"],data_recieved["beats"])
 	populate_agents(data_recieved["viewer"]["show"])
 	
-	Field.load_timestamp(CalChart.MusicTimestamp.new())
-	Field.stop()
+	agent_director.load_timestamp(CalChart.MusicTimestamp.new())
+	agent_director.stop()
 
 func create_show_objects(data: Dictionary, beat_data : String):
 	
@@ -52,12 +54,12 @@ func create_show_objects(data: Dictionary, beat_data : String):
 	show.rendered_beatsheet = render_beatsheet(show.beatsheet)
 		
 	slider.max_value = total_beats
-	Field.current_show = show
+	agent_director.current_show = show
 
 func populate_agents(data):
 	
 	Logger.info("LOADER","Populating field...")
-	var show = Field.current_show
+	var show = agent_director.current_show
 	
 	# initial population - populate field with named agents
 	for label in data["labels"]:
@@ -114,7 +116,7 @@ func populate_agents(data):
 		animator.add_animation_library("rendered_show",library)
 		animator.set_current_animation("rendered_show/movements")
 		
-		Field.add_child(agent)
+		agent_container.add_child(agent)
 	
 func load_beatsheet(data):
 	

@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 var current_show = CalChart.Show.new()
 var current_timestamp = CalChart.MusicTimestamp.new()
@@ -11,29 +11,32 @@ var is_audio_loaded = false
 var highlighted_agent : Node3D = null
 
 @onready
-var play_icon : TextureRect = self.get_parent().get_node("UI/Navbar/Controls/Play/Play Icon")
+var agent_container = $"../../World/Agents"
+@onready
+var movement_controller = $"../Movement Controller"
+
+@onready
+var play_icon : TextureRect = $"../../UI/Navbar/Controls/Play/Play Icon"
 var play_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://texture/play.png"))
 var pause_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://texture/pause.png"))
 
 @onready
-var sheet_label : Label = self.get_parent().get_node("UI/Navbar/Stunt Sheet")
+var sheet_label : Label = $"../../UI/Navbar/Stunt Sheet"
 @onready
-var beat_label : Label = self.get_parent().get_node("UI/Navbar/Beat")
+var beat_label : Label = $"../../UI/Navbar/Beat"
 @onready
-var slider : Slider = self.get_parent().get_node("UI/Navbar/Scrubber/Slider")
+var slider : Slider = $"../../UI/Navbar/Scrubber/Slider"
 @onready
-var audio_player = $"../AudioStreamPlayer"
+var audio_player = $"../../World/AudioStreamPlayer"
 @onready
-var camera = self.get_parent().get_node("Camera")
-@onready
-var dot_highlight_dropdown : OptionButton = $"../UI/Tab Menu/Menu/Options/Highlight/OptionButton"
+var dot_highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Menu/Options/Highlight/OptionButton"
 
 func play():
 	
 	load_timestamp(current_timestamp)
 	var time = current_show.get_seconds_elapsed(current_timestamp)
 	
-	for agent in self.get_children():
+	for agent in agent_container.get_children():
 		
 		agent.get_node("Animator").seek(time)
 		agent.get_node("Animator").play()
@@ -47,7 +50,7 @@ func stop():
 	load_timestamp(current_timestamp)
 	var time = current_show.get_seconds_elapsed(current_timestamp)
 	
-	for agent in self.get_children():
+	for agent in agent_container.get_children():
 		
 		agent.get_node("Animator").pause()
 		
@@ -60,7 +63,7 @@ func load_timestamp(timestamp : CalChart.MusicTimestamp, sync = false, update_sl
 	current_timestamp = timestamp.normalize(current_show)
 	var time = current_show.get_seconds_elapsed(current_timestamp)
 	
-	for agent in self.get_children():
+	for agent in agent_container.get_children():
 		
 		var animator : AnimationPlayer = agent.get_node("Animator")
 		animator.seek(time,true)
@@ -104,7 +107,7 @@ func _process(delta):
 		else:
 			_on_step_forward_pressed()
 		
-	if(!camera.mouse_locked):
+	if(!movement_controller.mouse_locked):
 		
 		if(Input.is_action_just_pressed("Move Camera Up")):
 			toggle_active_playback()
@@ -161,12 +164,12 @@ func _on_skip_backward_pressed():
 	update_slider()
 	
 func deselect_all_agents():
-	for child in get_children():
+	for child in agent_container.get_children():
 		child.deselect()
 
 func _on_option_button_item_selected(index):
 	var dot = dot_highlight_dropdown.get_item_text(index)
 	
 	deselect_all_agents()
-	highlighted_agent = get_node(dot)
+	highlighted_agent = agent_container.get_node(dot)
 	highlighted_agent.select()
