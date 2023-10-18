@@ -1,0 +1,841 @@
+[gd_scene load_steps=43 format=3 uid="uid://baw41daaninrp"]
+
+[ext_resource type="Script" path="res://viewer/field.gd" id="1_tcddt"]
+[ext_resource type="Texture2D" uid="uid://c5j3tpeipvw8r" path="res://texture/field.png" id="2_665ef"]
+[ext_resource type="Script" path="res://viewer/camera.gd" id="2_mlap5"]
+[ext_resource type="Script" path="res://ui/ui.gd" id="3_irh6w"]
+[ext_resource type="Shader" path="res://ui/calchart_nouveau.gdshader" id="4_3fpuy"]
+[ext_resource type="Theme" uid="uid://rkuq07yx7uwt" path="res://ui/ui.tres" id="4_5a274"]
+[ext_resource type="Texture2D" uid="uid://boxhrwr2cegun" path="res://texture/play.png" id="4_wtcdm"]
+[ext_resource type="Texture2D" uid="uid://ct6gxwc6yfis8" path="res://texture/wing.png" id="5_0pgsn"]
+[ext_resource type="Script" path="res://ui/camera_button.gd" id="5_8rfij"]
+[ext_resource type="Script" path="res://ui/view_options.gd" id="5_mc0et"]
+[ext_resource type="Texture2D" uid="uid://kmgyrtcfx16h" path="res://texture/skip_forward.png" id="5_vwu04"]
+[ext_resource type="Texture2D" uid="uid://0dk8hoanbpr3" path="res://texture/eye.png" id="5_xly6b"]
+[ext_resource type="Script" path="res://director/loader.gd" id="6_inifb"]
+[ext_resource type="Texture2D" uid="uid://dyavtdo23l53x" path="res://texture/bone.png" id="6_iqocg"]
+[ext_resource type="Texture2D" uid="uid://sbcbchcxc27" path="res://texture/head.png" id="8_cas17"]
+[ext_resource type="Script" path="res://ui/tab_menu.gd" id="8_duh0y"]
+[ext_resource type="Texture2D" uid="uid://v1lh8yvq05hq" path="res://texture/spectator.png" id="8_hfylf"]
+[ext_resource type="Texture2D" uid="uid://bki3g7giotk5d" path="res://texture/highstepper.png" id="8_pjn8b"]
+[ext_resource type="Texture2D" uid="uid://cld2872o0eij" path="res://texture/menu.png" id="9_eeae5"]
+[ext_resource type="Texture2D" uid="uid://bal26t6lpaaeh" path="res://texture/simulator.png" id="10_ofl3t"]
+[ext_resource type="Script" path="res://director/network.gd" id="12_1ifd6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lv2sy"]
+
+[sub_resource type="Sky" id="Sky_taq2v"]
+sky_material = SubResource("ProceduralSkyMaterial_lv2sy")
+
+[sub_resource type="Environment" id="Environment_8aip2"]
+background_mode = 2
+sky = SubResource("Sky_taq2v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ed38i"]
+albedo_texture = ExtResource("2_665ef")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1h4js"]
+size = Vector2(160, 84)
+
+[sub_resource type="FontVariation" id="FontVariation_wostj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f23hy"]
+font = SubResource("FontVariation_wostj")
+font_size = 43
+outline_size = 2
+
+[sub_resource type="FontVariation" id="FontVariation_hwhbm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8j0sq"]
+font = SubResource("FontVariation_hwhbm")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_1mtp0"]
+line_spacing = -7.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_expfl"]
+font = SubResource("FontVariation_hwhbm")
+font_size = 30
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxmka"]
+shader = ExtResource("4_3fpuy")
+
+[sub_resource type="Animation" id="Animation_2dfly"]
+resource_name = "slide_out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 120), Vector2(-480, 120)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsdqm"]
+_data = {
+"slide_out": SubResource("Animation_2dfly")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwrag"]
+font_size = 24
+
+[sub_resource type="FontVariation" id="FontVariation_oe8b1"]
+variation_embolden = 0.45
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ofsf"]
+font = SubResource("FontVariation_oe8b1")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mjcl"]
+font_size = 24
+
+[sub_resource type="Animation" id="Animation_32g33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/Show List:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-240, 45)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Toolbar/Title Bar:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:anchors_preset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:anchor_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_orhoi"]
+resource_name = "transition"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/Show List:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-240, 45), Vector2(-240, -1000)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Toolbar/Title Bar:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 0.420448, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:anchors_preset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [-1, -1, 15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:anchor_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(0.517632, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eo7hj"]
+_data = {
+"RESET": SubResource("Animation_32g33"),
+"transition": SubResource("Animation_orhoi")
+}
+
+[node name="CalChartViewer3D" type="Node"]
+metadata/_edit_horizontal_guides_ = [120.0]
+
+[node name="Viewer" type="Node" parent="."]
+
+[node name="Environment" type="WorldEnvironment" parent="Viewer"]
+environment = SubResource("Environment_8aip2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Viewer"]
+
+[node name="Field" type="Node3D" parent="Viewer"]
+script = ExtResource("1_tcddt")
+
+[node name="Field Model" type="Node3D" parent="Viewer"]
+
+[node name="Field Base" type="MeshInstance3D" parent="Viewer/Field Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 42)
+material_override = SubResource("StandardMaterial3D_ed38i")
+mesh = SubResource("PlaneMesh_1h4js")
+
+[node name="Camera" type="Camera3D" parent="Viewer"]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 80, 40, 100)
+script = ExtResource("2_mlap5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Viewer"]
+transform = Transform3D(0.918021, 0.0965321, -0.384602, 0.390708, -0.0545816, 0.918895, 0.0677106, -0.993832, -0.0878229, -16.5302, 63.7299, -23.8063)
+
+[node name="UI" type="Control" parent="Viewer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_irh6w")
+
+[node name="Focus Detector" type="TextureButton" parent="Viewer/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.999
+anchor_bottom = 0.994
+offset_right = 1.91992
+offset_bottom = 6.47998
+action_mode = 0
+
+[node name="Toolbar" type="ColorRect" parent="Viewer/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 120.0
+color = Color(0.160784, 0.168627, 0.192157, 1)
+
+[node name="Title Bar" type="Control" parent="Viewer/UI/Toolbar"]
+anchors_preset = 0
+
+[node name="Show Name" type="Label" parent="Viewer/UI/Toolbar/Title Bar"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 20.0
+offset_right = 343.0
+offset_bottom = 82.0
+text = "Show Name"
+label_settings = SubResource("LabelSettings_f23hy")
+
+[node name="Year" type="Label" parent="Viewer/UI/Toolbar/Title Bar"]
+modulate = Color(1, 1, 1, 0.623529)
+layout_mode = 0
+offset_left = 93.0
+offset_top = 73.0
+offset_right = 296.0
+offset_bottom = 115.0
+text = "2023"
+label_settings = SubResource("LabelSettings_8j0sq")
+
+[node name="Highstepper" type="TextureRect" parent="Viewer/UI/Toolbar/Title Bar"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 21.0
+offset_right = 85.0
+offset_bottom = 97.0
+texture = ExtResource("8_pjn8b")
+expand_mode = 1
+
+[node name="View Options" type="HBoxContainer" parent="Viewer/UI/Toolbar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -602.0
+offset_right = -1.0
+offset_bottom = 120.0
+grow_horizontal = 0
+script = ExtResource("5_mc0et")
+
+[node name="Free View" type="Control" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+script = ExtResource("5_8rfij")
+state = 0
+
+[node name="Icon" type="TextureRect" parent="Viewer/UI/Toolbar/View Options/Free View"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 75.0
+texture = ExtResource("5_0pgsn")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Viewer/UI/Toolbar/View Options/Free View"]
+layout_mode = 0
+offset_top = 75.0
+offset_right = 120.0
+offset_bottom = 101.0
+text = "Free View"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="Viewer/UI/Toolbar/View Options/Free View"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+
+[node name="Spectator View" type="Control" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+script = ExtResource("5_8rfij")
+camera_mode = 1
+
+[node name="Icon" type="TextureRect" parent="Viewer/UI/Toolbar/View Options/Spectator View"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 75.0
+texture = ExtResource("8_hfylf")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Viewer/UI/Toolbar/View Options/Spectator View"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 120.0
+offset_bottom = 108.0
+text = "Spectator
+View"
+label_settings = SubResource("LabelSettings_1mtp0")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="Viewer/UI/Toolbar/View Options/Spectator View"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+
+[node name="Topdown View" type="Control" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+script = ExtResource("5_8rfij")
+camera_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Viewer/UI/Toolbar/View Options/Topdown View"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 75.0
+texture = ExtResource("5_xly6b")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Viewer/UI/Toolbar/View Options/Topdown View"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 120.0
+offset_bottom = 108.0
+text = "Top-Down
+View"
+label_settings = SubResource("LabelSettings_1mtp0")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="Viewer/UI/Toolbar/View Options/Topdown View"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+
+[node name="Divider" type="ColorRect" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(2, 80)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.09375, 0.0976563, 0.113281, 1)
+
+[node name="First-Person View" type="Control" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+script = ExtResource("5_8rfij")
+camera_mode = 3
+state = 2
+
+[node name="Icon" type="TextureRect" parent="Viewer/UI/Toolbar/View Options/First-Person View"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 75.0
+texture = ExtResource("6_iqocg")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Viewer/UI/Toolbar/View Options/First-Person View"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 120.0
+offset_bottom = 108.0
+text = "First-Person
+View"
+label_settings = SubResource("LabelSettings_1mtp0")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="Viewer/UI/Toolbar/View Options/First-Person View"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+
+[node name="Third-Person View" type="Control" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+script = ExtResource("5_8rfij")
+camera_mode = 4
+state = 2
+
+[node name="Icon" type="TextureRect" parent="Viewer/UI/Toolbar/View Options/Third-Person View"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 75.0
+texture = ExtResource("8_cas17")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Viewer/UI/Toolbar/View Options/Third-Person View"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 120.0
+offset_bottom = 108.0
+text = "Third-Person
+View"
+label_settings = SubResource("LabelSettings_1mtp0")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="Viewer/UI/Toolbar/View Options/Third-Person View"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+
+[node name="Divider2" type="ColorRect" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(2, 80)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.09375, 0.0976563, 0.113281, 1)
+
+[node name="Cal Band Simulator" type="Control" parent="Viewer/UI/Toolbar/View Options"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+script = ExtResource("5_8rfij")
+camera_mode = 2
+state = 2
+
+[node name="Icon" type="TextureRect" parent="Viewer/UI/Toolbar/View Options/Cal Band Simulator"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 75.0
+texture = ExtResource("10_ofl3t")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Viewer/UI/Toolbar/View Options/Cal Band Simulator"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 120.0
+offset_bottom = 108.0
+text = "Cal Band
+Simulator"
+label_settings = SubResource("LabelSettings_1mtp0")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="Viewer/UI/Toolbar/View Options/Cal Band Simulator"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+
+[node name="Navbar" type="ColorRect" parent="Viewer/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+color = Color(0.160784, 0.168627, 0.192157, 1)
+
+[node name="Stunt Sheet" type="Label" parent="Viewer/UI/Navbar"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 21.0
+offset_right = 227.0
+offset_bottom = 63.0
+text = "Stunt Sheet "
+label_settings = SubResource("LabelSettings_expfl")
+
+[node name="Beat" type="Label" parent="Viewer/UI/Navbar"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 227.0
+offset_bottom = 106.0
+text = "Beat"
+label_settings = SubResource("LabelSettings_8j0sq")
+
+[node name="Scrubber" type="Control" parent="Viewer/UI/Navbar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+
+[node name="Slider" type="HSlider" parent="Viewer/UI/Navbar/Scrubber"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -28.0
+offset_bottom = 20.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_5a274")
+min_value = 1.0
+step = 0.01
+value = 1.0
+scrollable = false
+
+[node name="Controls" type="Control" parent="Viewer/UI/Navbar"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="ColorRect" parent="Viewer/UI/Navbar/Controls"]
+material = SubResource("ShaderMaterial_lxmka")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_right = 60.0
+color = Color(0.0941176, 0.0980392, 0.113725, 1)
+
+[node name="Play Icon" type="TextureRect" parent="Viewer/UI/Navbar/Controls/Play"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.5
+offset_top = 37.5
+offset_right = -37.5
+offset_bottom = -37.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_wtcdm")
+expand_mode = 1
+
+[node name="Step Forward" type="TextureButton" parent="Viewer/UI/Navbar/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = -15.0
+offset_right = 120.0
+offset_bottom = 15.0
+texture_normal = ExtResource("4_wtcdm")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Step Backward" type="TextureButton" parent="Viewer/UI/Navbar/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -15.0
+offset_right = -90.0
+offset_bottom = 15.0
+texture_normal = ExtResource("4_wtcdm")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Skip Backward" type="TextureButton" parent="Viewer/UI/Navbar/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -15.0
+offset_right = -150.0
+offset_bottom = 15.0
+texture_normal = ExtResource("5_vwu04")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Skip Forward" type="TextureButton" parent="Viewer/UI/Navbar/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -15.0
+offset_right = 180.0
+offset_bottom = 15.0
+texture_normal = ExtResource("5_vwu04")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Tab Menu" type="Control" parent="Viewer/UI"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Menu" type="ColorRect" parent="Viewer/UI/Tab Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+offset_right = 480.0
+offset_bottom = -120.0
+grow_horizontal = 0
+color = Color(0.0941176, 0.0980392, 0.113725, 1)
+script = ExtResource("8_duh0y")
+
+[node name="Tab Animator" type="AnimationPlayer" parent="Viewer/UI/Tab Menu/Menu"]
+libraries = {
+"": SubResource("AnimationLibrary_xsdqm")
+}
+
+[node name="Button" type="ColorRect" parent="Viewer/UI/Tab Menu/Menu"]
+layout_mode = 0
+offset_left = -60.0
+offset_bottom = 60.0
+color = Color(0.0941176, 0.0980392, 0.113725, 1)
+
+[node name="TextureButton" type="TextureButton" parent="Viewer/UI/Tab Menu/Menu/Button"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 50.0
+offset_bottom = 50.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_eeae5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Options" type="VBoxContainer" parent="Viewer/UI/Tab Menu/Menu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 840.0
+grow_horizontal = 2
+
+[node name="Highlight" type="Control" parent="Viewer/UI/Tab Menu/Menu/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Viewer/UI/Tab Menu/Menu/Options/Highlight"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 460.0
+offset_bottom = 60.0
+text = "Highlight My Dot"
+label_settings = SubResource("LabelSettings_xwrag")
+
+[node name="OptionButton" type="OptionButton" parent="Viewer/UI/Tab Menu/Menu/Options/Highlight"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 65.0
+offset_right = 460.0
+offset_bottom = 105.0
+theme = ExtResource("4_5a274")
+clip_text = true
+item_count = 1
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+popup/item_0/text = "None"
+popup/item_0/id = 0
+
+[node name="Main Menu" type="ColorRect" parent="Viewer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.160784, 0.168627, 0.192157, 1)
+
+[node name="Anchor" type="Control" parent="Viewer/UI/Main Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Label" parent="Viewer/UI/Main Menu/Anchor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 24.025
+anchor_top = 12.225
+anchor_right = 24.025
+anchor_bottom = 12.225
+offset_left = -446.0
+offset_top = -77.0
+offset_right = 446.0
+text = "CalChart Viewer 3D"
+label_settings = SubResource("LabelSettings_4ofsf")
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="Viewer/UI/Main Menu/Anchor"]
+modulate = Color(1, 1, 1, 0.764706)
+layout_mode = 0
+offset_left = -240.0
+offset_top = -4.0
+offset_right = 240.0
+offset_bottom = 33.0
+text = "Loading shows..."
+label_settings = SubResource("LabelSettings_4mjcl")
+horizontal_alignment = 1
+
+[node name="Highstepper" type="TextureRect" parent="Viewer/UI/Main Menu/Anchor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.031
+anchor_right = 0.5
+anchor_bottom = 1.031
+offset_left = -150.0
+offset_top = -386.0
+offset_right = 150.0
+offset_bottom = -86.0
+texture = ExtResource("8_pjn8b")
+expand_mode = 1
+
+[node name="Show List" type="ItemList" parent="Viewer/UI/Main Menu/Anchor"]
+layout_mode = 0
+offset_left = -240.0
+offset_top = 45.0
+offset_right = 240.0
+offset_bottom = 365.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_5a274")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewer/UI/Main Menu"]
+libraries = {
+"": SubResource("AnimationLibrary_eo7hj")
+}
+
+[node name="Director" type="Node" parent="."]
+
+[node name="Loader" type="Node" parent="Director"]
+script = ExtResource("6_inifb")
+
+[node name="Network" type="HTTPRequest" parent="Director"]
+script = ExtResource("12_1ifd6")
+
+[node name="Field" type="Node" parent="Director"]
+
+[connection signal="pressed" from="Viewer/UI/Focus Detector" to="Viewer/Camera" method="_on_focus_detector_pressed"]
+[connection signal="drag_ended" from="Viewer/UI/Navbar/Scrubber/Slider" to="Viewer/UI" method="_on_slider_drag_ended"]
+[connection signal="drag_started" from="Viewer/UI/Navbar/Scrubber/Slider" to="Viewer/UI" method="_on_slider_drag_started"]
+[connection signal="value_changed" from="Viewer/UI/Navbar/Scrubber/Slider" to="Viewer/UI" method="_on_slider_value_changed"]
+[connection signal="pressed" from="Viewer/UI/Navbar/Controls/Step Forward" to="Viewer/Field" method="_on_step_forward_pressed"]
+[connection signal="pressed" from="Viewer/UI/Navbar/Controls/Step Backward" to="Viewer/Field" method="_on_step_backward_pressed"]
+[connection signal="pressed" from="Viewer/UI/Navbar/Controls/Skip Backward" to="Viewer/Field" method="_on_skip_backward_pressed"]
+[connection signal="pressed" from="Viewer/UI/Navbar/Controls/Skip Forward" to="Viewer/Field" method="_on_skip_forward_pressed"]
+[connection signal="pressed" from="Viewer/UI/Tab Menu/Menu/Button/TextureButton" to="Viewer/UI/Tab Menu/Menu" method="_on_texture_button_pressed"]
+[connection signal="item_selected" from="Viewer/UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="Viewer/Field" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Viewer/UI/Tab Menu/Menu/Options/Highlight/OptionButton" to="Viewer/UI/Toolbar/View Options" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Viewer/UI/Main Menu/Anchor/Show List" to="Director/Network" method="_on_show_list_item_selected"]
