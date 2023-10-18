@@ -1,5 +1,6 @@
-[gd_scene load_steps=43 format=3 uid="uid://baw41daaninrp"]
+[gd_scene load_steps=44 format=3 uid="uid://baw41daaninrp"]
 
+[ext_resource type="Script" path="res://meta.gd" id="1_0agni"]
 [ext_resource type="Script" path="res://viewer/field.gd" id="1_tcddt"]
 [ext_resource type="Texture2D" uid="uid://c5j3tpeipvw8r" path="res://texture/field.png" id="2_665ef"]
 [ext_resource type="Script" path="res://viewer/camera.gd" id="2_mlap5"]
@@ -228,6 +229,7 @@ _data = {
 }
 
 [node name="CalChartViewer3D" type="Node"]
+script = ExtResource("1_0agni")
 metadata/_edit_horizontal_guides_ = [120.0]
 
 [node name="Viewer" type="Node" parent="."]
