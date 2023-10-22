@@ -47,7 +47,7 @@ func _process(delta):
 		
 	if (camera_mode == CalChart.CAMERA_MODE.FIRSTPERSON):
 		camera.position = agent_director.highlighted_agent.position + Vector3(0,1.7,0)
-		#self.rotation = field.highlighted_agent.rotation
+		camera.rotation = agent_director.highlighted_agent.rotation
 	
 func _input(event):
 	if(mouse_locked):

@@ -2,28 +2,29 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5j3tpeipvw8r"
-path="res://.godot/imported/field.png-1b99838675247613ec4c6e2623ac774f.ctex"
+uid="uid://bu0mnp3sg0mc5"
+path.s3tc="res://.godot/imported/field.png-1b99838675247613ec4c6e2623ac774f.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://world/textures/field.png"
-dest_files=["res://.godot/imported/field.png-1b99838675247613ec4c6e2623ac774f.ctex"]
+dest_files=["res://.godot/imported/field.png-1b99838675247613ec4c6e2623ac774f.s3tc.ctex"]
 
 [params]
 
-compress/mode=3
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=1
+compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
+roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cqke1inx24x7"]
+[gd_scene load_steps=51 format=3 uid="uid://cqke1inx24x7"]
 
 [ext_resource type="Script" path="res://meta.gd" id="1_0agni"]
 [ext_resource type="Theme" uid="uid://rkuq07yx7uwt" path="res://ui/ui.tres" id="4_5a274"]
@@ -17,11 +17,15 @@
 [ext_resource type="Shader" path="res://ui/shaders/circle.gdshader" id="17_gu7m6"]
 [ext_resource type="Texture2D" uid="uid://boxhrwr2cegun" path="res://ui/textures/play.png" id="18_53c3i"]
 [ext_resource type="Texture2D" uid="uid://kmgyrtcfx16h" path="res://ui/textures/skip_forward.png" id="19_6a6cn"]
+[ext_resource type="Texture2D" uid="uid://egpa4gfy53l6" path="res://ui/textures/pause.png" id="19_hno2s"]
 [ext_resource type="Script" path="res://ui/scripts/tab_menu.gd" id="20_ork4b"]
 [ext_resource type="Texture2D" uid="uid://cld2872o0eij" path="res://ui/textures/menu.png" id="21_dywut"]
 [ext_resource type="Script" path="res://director/agentdirector.gd" id="21_h38bp"]
 [ext_resource type="Script" path="res://director/movementcontroller.gd" id="22_1bkpa"]
-[ext_resource type="Texture2D" uid="uid://c5j3tpeipvw8r" path="res://world/textures/field.png" id="22_t7cpp"]
+[ext_resource type="Material" uid="uid://bq5qyfa2p4gjx" path="res://world/shaders/field_defilter.material" id="22_6h8ki"]
+[ext_resource type="Script" path="res://ui/scripts/main_menu.gd" id="22_7q36i"]
+[ext_resource type="Sky" uid="uid://dj8gccn3lqtx0" path="res://world/sky/night/sky.tres" id="22_flpr6"]
+[ext_resource type="PackedScene" uid="uid://x4x7q40mu4wq" path="res://world/models/highstepper.tscn" id="22_xfbvy"]
 
 [sub_resource type="FontVariation" id="FontVariation_wostj"]
 
@@ -46,6 +50,158 @@ font_size = 30
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lxmka"]
 shader = ExtResource("17_gu7m6")
 
+[sub_resource type="Animation" id="Animation_n17o5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selector:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(240, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Selector:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 60)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scene Options:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Settings Options:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scene Options:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 64)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Settings Options:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(480, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_dtswh"]
+resource_name = "selector_bounce"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selector:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(0.6, 0.6, 0.6, 1),
+"update": 0,
+"values": [Vector2(240, 4), Vector2(480, 4), Vector2(480, 4), Vector2(240, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Selector:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3),
+"transitions": PackedFloat32Array(0.6, 1),
+"update": 0,
+"values": [Vector2(0, 60), Vector2(240, 60)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scene Options:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Settings Options:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.16, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scene Options:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.14, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 64), Vector2(480, 64)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Settings Options:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.14, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(480, 64), Vector2(0, 64)]
+}
+
 [sub_resource type="Animation" id="Animation_2dfly"]
 resource_name = "slide_out"
 length = 0.1
@@ -64,11 +220,21 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xsdqm"]
 _data = {
+"RESET": SubResource("Animation_n17o5"),
+"selector_bounce": SubResource("Animation_dtswh"),
 "slide_out": SubResource("Animation_2dfly")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_xwrag"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_gfxua"]
+font_size = 24
+font_color = Color(1, 1, 1, 0.360784)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s8wxk"]
+font_size = 24
+font_color = Color(1, 1, 1, 0.360784)
 
 [sub_resource type="FontVariation" id="FontVariation_oe8b1"]
 variation_embolden = 0.45
@@ -79,6 +245,13 @@ font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_4mjcl"]
 font_size = 24
+
+[sub_resource type="Environment" id="Environment_u347e"]
+background_mode = 1
+background_color = Color(0.160784, 0.168627, 0.192157, 1)
+
+[sub_resource type="World3D" id="World3D_hqguv"]
+environment = SubResource("Environment_u347e")
 
 [sub_resource type="Animation" id="Animation_32g33"]
 length = 0.001
@@ -121,22 +294,10 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:anchors_preset")
+tracks/3/path = NodePath(".:anchor_bottom")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [15]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:anchor_bottom")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -173,7 +334,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Toolbar/Title Bar:modulate")
+tracks/2/path = NodePath("../../Viewer Controls/Toolbar/Title Bar:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -185,24 +346,12 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:anchors_preset")
+tracks/3/path = NodePath(".:anchor_bottom")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.2, 0.5, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [-1, -1, 15]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:anchor_bottom")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.2, 0.5),
-"transitions": PackedFloat32Array(0.517632, 1),
+"transitions": PackedFloat32Array(1.7411, 1),
 "update": 0,
 "values": [1.0, 0.0]
 }
@@ -213,23 +362,16 @@ _data = {
 "transition": SubResource("Animation_orhoi")
 }
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lv2sy"]
-
-[sub_resource type="Sky" id="Sky_taq2v"]
-sky_material = SubResource("ProceduralSkyMaterial_lv2sy")
-
 [sub_resource type="Environment" id="Environment_8aip2"]
 background_mode = 2
-sky = SubResource("Sky_taq2v")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ed38i"]
-albedo_texture = ExtResource("22_t7cpp")
+sky = ExtResource("22_flpr6")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1h4js"]
 size = Vector2(160, 84)
 
 [node name="CalChartViewer3D" type="Node"]
 script = ExtResource("1_0agni")
+release_type = 1
 credits = PackedStringArray("")
 metadata/_edit_horizontal_guides_ = [120.0]
 
@@ -270,6 +412,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="Toolbar" type="ColorRect" parent="UI/Viewer Controls"]
@@ -613,6 +757,21 @@ grow_vertical = 2
 texture = ExtResource("18_53c3i")
 expand_mode = 1
 
+[node name="Pause Icon" type="TextureRect" parent="UI/Viewer Controls/Navbar/Controls/Play"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.5
+offset_top = 37.5
+offset_right = -37.5
+offset_bottom = -37.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_hno2s")
+expand_mode = 1
+
 [node name="Step Forward" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
 anchors_preset = -1
@@ -715,17 +874,42 @@ texture_normal = ExtResource("21_dywut")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Options" type="VBoxContainer" parent="UI/Tab Menu/Background"]
+[node name="Flip-Flop" type="HBoxContainer" parent="UI/Tab Menu/Background"]
+layout_mode = 0
+offset_right = 484.0
+offset_bottom = 60.0
+
+[node name="Scene" type="Button" parent="UI/Tab Menu/Background/Flip-Flop"]
+custom_minimum_size = Vector2(238, 60)
+layout_mode = 2
+theme = ExtResource("4_5a274")
+text = "Scene"
+
+[node name="Settings" type="Button" parent="UI/Tab Menu/Background/Flip-Flop"]
+custom_minimum_size = Vector2(238, 60)
+layout_mode = 2
+theme = ExtResource("4_5a274")
+text = "Settings"
+
+[node name="Selector" type="ColorRect" parent="UI/Tab Menu/Background"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 240.0
+offset_bottom = 64.0
+
+[node name="Scene Options" type="VBoxContainer" parent="UI/Tab Menu/Background"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 840.0
+offset_top = 64.0
+offset_bottom = 819.0
 grow_horizontal = 2
 
-[node name="Highlight" type="Control" parent="UI/Tab Menu/Background/Options"]
+[node name="Highlight" type="Control" parent="UI/Tab Menu/Background/Scene Options"]
+custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Tab Menu/Background/Options/Highlight"]
+[node name="Label" type="Label" parent="UI/Tab Menu/Background/Scene Options/Highlight"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -734,7 +918,7 @@ offset_bottom = 60.0
 text = "Highlight My Dot"
 label_settings = SubResource("LabelSettings_xwrag")
 
-[node name="OptionButton" type="OptionButton" parent="UI/Tab Menu/Background/Options/Highlight"]
+[node name="OptionButton" type="OptionButton" parent="UI/Tab Menu/Background/Scene Options/Highlight"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 65.0
@@ -749,21 +933,88 @@ allow_reselect = true
 popup/item_0/text = "None"
 popup/item_0/id = 0
 
-[node name="Main Menu" type="Control" parent="UI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
+[node name="Settings Options" type="VBoxContainer" parent="UI/Tab Menu/Background"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 64.0
+offset_right = 960.0
+offset_bottom = 964.0
 
-[node name="Background" type="ColorRect" parent="UI/Main Menu"]
+[node name="Scale" type="Control" parent="UI/Tab Menu/Background/Settings Options"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Tab Menu/Background/Settings Options/Scale"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 460.0
+offset_bottom = 60.0
+text = "Marcher Scale"
+label_settings = SubResource("LabelSettings_xwrag")
+
+[node name="LineEdit" type="LineEdit" parent="UI/Tab Menu/Background/Settings Options/Scale"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 65.0
+offset_right = 460.0
+offset_bottom = 105.0
+focus_mode = 1
+theme = ExtResource("4_5a274")
+text = "1.0"
+placeholder_text = "1.0"
+
+[node name="Main Menu" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("22_7q36i")
+
+[node name="Background" type="ColorRect" parent="UI/Main Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.160784, 0.168627, 0.192157, 1)
+
+[node name="Author Info" type="Label" parent="UI/Main Menu/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -55.0
+offset_right = 408.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Maintained by Dawn Schumacher"
+label_settings = SubResource("LabelSettings_gfxua")
+
+[node name="Version Info" type="Label" parent="UI/Main Menu/Background"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -94.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "v0.0.0 (Experimental)
+Windows
+"
+label_settings = SubResource("LabelSettings_s8wxk")
+horizontal_alignment = 2
 
 [node name="Content" type="Control" parent="UI/Main Menu"]
 layout_mode = 1
@@ -800,20 +1051,6 @@ text = "Loading shows..."
 label_settings = SubResource("LabelSettings_4mjcl")
 horizontal_alignment = 1
 
-[node name="Highstepper" type="TextureRect" parent="UI/Main Menu/Content"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.031
-anchor_right = 0.5
-anchor_bottom = 1.031
-offset_left = -150.0
-offset_top = -386.0
-offset_right = 150.0
-offset_bottom = -86.0
-texture = ExtResource("7_84ki6")
-expand_mode = 1
-
 [node name="Show List" type="ItemList" parent="UI/Main Menu/Content"]
 layout_mode = 0
 offset_left = -240.0
@@ -822,6 +1059,29 @@ offset_right = 240.0
 offset_bottom = 365.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("4_5a274")
+
+[node name="Highstepper Container" type="SubViewportContainer" parent="UI/Main Menu/Content"]
+layout_mode = 0
+offset_left = -150.0
+offset_top = -386.0
+offset_right = 150.0
+offset_bottom = -86.0
+stretch = true
+
+[node name="Highstepper Viewport" type="SubViewport" parent="UI/Main Menu/Content/Highstepper Container"]
+world_3d = SubResource("World3D_hqguv")
+handle_input_locally = false
+size = Vector2i(300, 300)
+render_target_update_mode = 4
+
+[node name="Highstepper" parent="UI/Main Menu/Content/Highstepper Container/Highstepper Viewport" instance=ExtResource("22_xfbvy")]
+
+[node name="Highstepper Button" type="TextureButton" parent="UI/Main Menu/Content"]
+layout_mode = 0
+offset_left = -150.0
+offset_top = -386.0
+offset_right = 150.0
+offset_bottom = -86.0
 
 [node name="Main Menu Animator" type="AnimationPlayer" parent="UI/Main Menu"]
 root_node = NodePath("../Background")
@@ -842,14 +1102,19 @@ environment = SubResource("Environment_8aip2")
 
 [node name="Field Base" type="MeshInstance3D" parent="World/Field Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 42)
-material_override = SubResource("StandardMaterial3D_ed38i")
+material_override = ExtResource("22_6h8ki")
 mesh = SubResource("PlaneMesh_1h4js")
 
 [node name="Camera" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 80, 40, 100)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
-transform = Transform3D(0.918021, 0.0965321, -0.384602, 0.390708, -0.0545816, 0.918895, 0.0677106, -0.993832, -0.0878229, -16.5302, 63.7299, -23.8063)
+[node name="SpotLight3D" type="SpotLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 80, 45.6288, 42)
+light_energy = 13.61
+spot_range = 131.254
+spot_attenuation = 0.6
+spot_angle = 63.53
+spot_angle_attenuation = 0.120742
 
 [connection signal="pressed" from="UI/Focus Detector" to="Director/Movement Controller" method="_on_focus_detector_pressed"]
 [connection signal="drag_ended" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_ended"]
@@ -860,6 +1125,11 @@ transform = Transform3D(0.918021, 0.0965321, -0.384602, 0.390708, -0.0545816, 0.
 [connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Skip Backward" to="Director/Agent Director" method="_on_skip_backward_pressed"]
 [connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Skip Forward" to="Director/Agent Director" method="_on_skip_forward_pressed"]
 [connection signal="pressed" from="UI/Tab Menu/Background/Button/TextureButton" to="UI/Tab Menu/Background" method="_on_texture_button_pressed"]
-[connection signal="item_selected" from="UI/Tab Menu/Background/Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="UI/Tab Menu/Background/Options/Highlight/OptionButton" to="UI/Viewer Controls/Toolbar/View Options" method="_on_option_button_item_selected"]
+[connection signal="pressed" from="UI/Tab Menu/Background/Flip-Flop/Scene" to="UI/Tab Menu/Background" method="_on_scene_pressed"]
+[connection signal="pressed" from="UI/Tab Menu/Background/Flip-Flop/Settings" to="UI/Tab Menu/Background" method="_on_settings_pressed"]
+[connection signal="item_selected" from="UI/Tab Menu/Background/Scene Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="UI/Tab Menu/Background/Scene Options/Highlight/OptionButton" to="UI/Viewer Controls/Toolbar/View Options" method="_on_option_button_item_selected"]
+[connection signal="text_changed" from="UI/Tab Menu/Background/Settings Options/Scale/LineEdit" to="UI/Tab Menu/Background" method="_on_line_edit_text_changed"]
 [connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="Director/Network" method="_on_show_list_item_selected"]
+[connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="UI/Main Menu" method="_on_show_list_item_selected"]
+[connection signal="pressed" from="UI/Main Menu/Content/Highstepper Button" to="UI/Main Menu" method="_on_highstepper_button_pressed"]

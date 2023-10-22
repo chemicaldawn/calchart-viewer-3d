@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bki3g7giotk5d"
-path.s3tc="res://.godot/imported/highstepper.png-d9d28f14a64a126e4db3dc0a5bf51df7.s3tc.ctex"
+uid="uid://bg0ph1yw6ilvr"
+path.s3tc="res://.godot/imported/grass.png-2c3a49b93a93532e393041e541c736d4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://ui/textures/highstepper.png"
-dest_files=["res://.godot/imported/highstepper.png-d9d28f14a64a126e4db3dc0a5bf51df7.s3tc.ctex"]
+source_file="res://world/textures/grass.png"
+dest_files=["res://.godot/imported/grass.png-2c3a49b93a93532e393041e541c736d4.s3tc.ctex"]
 
 [params]
 

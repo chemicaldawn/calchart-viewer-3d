@@ -13,7 +13,7 @@ var year_label = $"../../UI/Viewer Controls/Toolbar/Title Bar/Year"
 @onready
 var slider : Slider = $"../../UI/Viewer Controls/Navbar/Scrubber/Slider"
 @onready
-var highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Background/Options/Highlight/OptionButton"
+var highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Background/Scene Options/Highlight/OptionButton"
 
 func load_show(data_recieved):
 	
@@ -37,7 +37,6 @@ func create_show_objects(data: Dictionary, beat_data : String):
 	year_label.text = show.year
 	
 	var stuntsheet_index = 0
-	var total_beats = 0
 	
 	for stuntsheet in data["sheets"]:
 		
@@ -46,13 +45,15 @@ func create_show_objects(data: Dictionary, beat_data : String):
 		sheet_object.beats = int(stuntsheet["beats"])
 		
 		show.sheets.append(sheet_object)
-		total_beats += sheet_object.beats
 		
 		stuntsheet_index += 1
 		
 	show.beatsheet = load_beatsheet(beat_data)
 	show.rendered_beatsheet = render_beatsheet(show.beatsheet)
-		
+	
+	var total_beats = len(show.rendered_beatsheet) - 2
+	
+	show.total_beats = total_beats
 	slider.max_value = total_beats
 	agent_director.current_show = show
 
@@ -69,8 +70,10 @@ func populate_agents(data):
 		var agent = Agent.instantiate()
 		var animation : Animation  = Animation.new()
 		animation.add_track(Animation.TYPE_POSITION_3D)
-		animation.set_length(600)
+		animation.add_track(Animation.TYPE_ROTATION_3D)
+		animation.set_length(1000)
 		animation.track_set_path(0,".")
+		animation.track_set_path(1,".")
 		
 		var animator : AnimationPlayer = agent.get_node("Animator")
 		
@@ -79,33 +82,51 @@ func populate_agents(data):
 		
 		for stuntsheet in data["sheets"]:
 			
-			# fill in stuntsheet movements
-			var movement_beat_index = 0
-			
-			for movement in stuntsheet["movements"][label]:
+			# protects against crashes caused by empty stuntsheets at the end of shows
+			if((len(show.rendered_beatsheet)) > (stuntsheet_beat_index + stuntsheet["beats"])):
 				
-				var start_pos = Vector2.ZERO
-				var end_pos = Vector2.ZERO
+				# fill in stuntsheet movements
+				var movement_beat_index = 0
 				
-				# sets start and end pos to same if mark. if even, uses actual start and end pos.
-				if(movement["type"] == "mark"):
-					start_pos = Vector2(movement["x"],movement["y"])
-					end_pos = start_pos
-				
-				elif(movement["type"] == "even"):
-					start_pos = Vector2(movement["x1"],movement["y1"])
-					end_pos = Vector2(movement["x2"],movement["y2"])
-				
-				# add keyframe
-				var start_time = show.get_seconds_elapsed_from_int(stuntsheet_beat_index + movement_beat_index)
-				var end_time = show.get_seconds_elapsed_from_int(stuntsheet_beat_index + movement_beat_index + int(movement["beats"]))
-				
-				animation.track_insert_key(0,start_time,Vector3(start_pos.x,0,start_pos.y))
-				animation.track_insert_key(0,end_time,Vector3(start_pos.x,0,start_pos.y))
-				
-				movement_beat_index += int(movement["beats"])
-				
-			stuntsheet_beat_index += int(stuntsheet["beats"])
+				for movement in stuntsheet["movements"][label]:
+					
+					var start_pos = Vector2.ZERO
+					var end_pos = Vector2.ZERO
+					var start_rotation = PI
+					var end_rotation = PI
+					
+					# sets start and end pos to same if mark. if even, uses actual start and end pos.
+					if(movement["type"] == "mark"):
+						start_pos = Vector2(movement["x"],movement["y"])
+						end_pos = start_pos
+						
+						start_rotation = PI + deg_to_rad(movement["facing"])
+						end_rotation = PI + deg_to_rad(movement["facing"])
+					
+					elif(movement["type"] == "even"):
+						start_pos = Vector2(movement["x1"],movement["y1"])
+						end_pos = Vector2(movement["x2"],movement["y2"])
+						
+						start_rotation = PI + deg_to_rad(movement["facing"])
+						end_rotation = PI + deg_to_rad(movement["facing"])
+						
+					elif(movement["type"] == "arc"):
+						start_pos = Vector2(movement["start_x"],movement["start_y"])
+						end_pos = Vector2(movement["center_x"],movement["center_y"])
+					
+					# add keyframe
+					var start_time = show.get_seconds_elapsed_from_int(stuntsheet_beat_index + movement_beat_index)
+					var end_time = show.get_seconds_elapsed_from_int(stuntsheet_beat_index + movement_beat_index + int(movement["beats"]))
+					
+					animation.track_insert_key(0,start_time,Vector3(start_pos.x,0,start_pos.y))
+					animation.track_insert_key(0,end_time,Vector3(start_pos.x,0,start_pos.y))
+					
+					animation.track_insert_key(1,end_time - 0.1,Quaternion.from_euler(Vector3(0,start_rotation,0)))
+					animation.track_insert_key(1,end_time,Quaternion.from_euler(Vector3(0,end_rotation,0)))
+					
+					movement_beat_index += int(movement["beats"])
+					
+				stuntsheet_beat_index += int(stuntsheet["beats"])
 		
 		agent.set_name(label)
 		highlight_dropdown.add_item(label)
@@ -144,5 +165,5 @@ func render_beatsheet(beatsheet : Array):
 		for j in range(0,i+1):
 			
 			rendered_beatsheet[i] += float(beatsheet[j])/1000.0
-			
+
 	return rendered_beatsheet

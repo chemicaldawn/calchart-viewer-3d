@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://l1gneip6h1wl"]
+[gd_scene load_steps=9 format=3 uid="uid://l1gneip6h1wl"]
 
 [ext_resource type="Script" path="res://world/scenes/agent.gd" id="1_w2h2s"]
 [ext_resource type="Material" uid="uid://bxg4oh4c4ru8i" path="res://world/materials/agent.tres" id="2_8vomq"]
+[ext_resource type="Texture2D" uid="uid://cckp8fsxtborc" path="res://world/textures/arrow.png" id="3_g2g2n"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ktwa"]
 
@@ -37,6 +38,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kjxg7")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61v06"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_g2g2n")
+billboard_mode = 2
+
 [node name="Agent" type="Node3D"]
 script = ExtResource("1_w2h2s")
 
@@ -50,3 +57,10 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.74737, 0)
 material_override = ExtResource("2_8vomq")
 mesh = SubResource("ArrayMesh_ylkiq")
 skeleton = NodePath("")
+
+[node name="Marker" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_61v06")
+pixel_size = 0.0015
+texture = ExtResource("3_g2g2n")

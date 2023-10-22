@@ -17,8 +17,8 @@ var movement_controller = $"../Movement Controller"
 
 @onready
 var play_icon : TextureRect = $"../../UI/Viewer Controls/Navbar/Controls/Play/Play Icon"
-var play_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://ui/textures/play.png"))
-var pause_texture : ImageTexture = ImageTexture.create_from_image(Image.load_from_file("res://ui/textures/pause.png"))
+@onready
+var pause_icon : TextureRect = $"../../UI/Viewer Controls/Navbar/Controls/Play/Pause Icon"
 
 @onready
 var sheet_label : Label = $"../../UI/Viewer Controls/Navbar/Stunt Sheet"
@@ -29,7 +29,7 @@ var slider : Slider = $"../../UI/Viewer Controls/Navbar/Scrubber/Slider"
 @onready
 var audio_player = $"../../World/AudioStreamPlayer"
 @onready
-var dot_highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Background/Options/Highlight/OptionButton"
+var dot_highlight_dropdown : OptionButton = $"../../UI/Tab Menu/Background/Scene Options/Highlight/OptionButton"
 
 func play():
 	
@@ -118,7 +118,7 @@ func _process(delta):
 		
 		if(current_timestamp.subbeat >= 1):
 			current_timestamp.beat += 1
-			current_timestamp.subbeat = 0
+			current_timestamp.subbeat -= 1
 			
 		load_timestamp(current_timestamp)
 		update_slider()
@@ -126,11 +126,13 @@ func _process(delta):
 
 func start_active_playback():
 	play()
-	play_icon.texture = pause_texture
+	play_icon.visible = false
+	pause_icon.visible = true
 
 func stop_active_playback():
 	stop()
-	play_icon.texture = play_texture
+	play_icon.visible = true
+	pause_icon.visible = false
 	
 func toggle_active_playback():
 	if(active_playback):

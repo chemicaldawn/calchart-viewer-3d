@@ -16,8 +16,8 @@ class MusicTimestamp:
 	
 	func normalize(show : CalChart.Show):
 		
-		if(beat >= len(show.beatsheet) - 1):
-			beat = (len(show.beatsheet) - 2)
+		if(beat > show.total_beats):
+			beat = show.total_beats
 		if(beat < 1):
 			beat = 1
 			
@@ -57,6 +57,8 @@ class Show:
 	# contains the total elapsed length at each beat
 	var rendered_beatsheet = []
 	
+	var total_beats = 0
+	
 	func get_sheet(timestamp: MusicTimestamp, offset : int = 0):
 		
 		var beat = timestamp.beat
@@ -76,6 +78,7 @@ class Show:
 			sheet_index += 1
 			
 	func get_seconds_elapsed(timestamp: MusicTimestamp):
+		print(len(rendered_beatsheet))
 		return rendered_beatsheet[timestamp.beat] + (float(beatsheet[timestamp.beat + 1])/1000.0) * timestamp.subbeat
 		
 	func get_seconds_elapsed_from_int(beat : int):

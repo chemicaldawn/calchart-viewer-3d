@@ -15,15 +15,22 @@ var audio_url = ""
 
 func _ready():
 	request_completed.connect(_on_request_completed)
+	
 	request("https://calchart-server.herokuapp.com/list/")
 	
 func _on_request_completed(result, response_code, headers, body):
+	
+	print(body.get_string_from_utf8())
+	print(headers)
 	
 	var content_type = "unknown"
 	
 	for header in headers:
 		if("Content-Type" in header):
 			content_type = header.split(" ")[1] 
+			
+		if("content-type" in header):
+			content_type = header.split(":")[1] 
 	
 	print(content_type)
 	
@@ -66,6 +73,7 @@ func _on_show_list_item_selected(index):
 	
 	var selected_show = shows[index]["slug"]
 	show_list.mouse_filter = show_list.MOUSE_FILTER_IGNORE
+	
 	request("https://calchart-server.herokuapp.com/get/" + selected_show + "/")
 	
 	info.text = "Downloading " + shows[index]["name"] + "..."

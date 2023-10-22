@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://x4x7q40mu4wq"]
+
+[ext_resource type="Texture2D" uid="uid://bki3g7giotk5d" path="res://ui/textures/highstepper.png" id="1_5od5n"]
+
+[sub_resource type="Environment" id="Environment_u347e"]
+background_mode = 1
+background_color = Color(0.160784, 0.168627, 0.192157, 1)
+
+[sub_resource type="Animation" id="Animation_lj3ym"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cug8v"]
+resource_name = "spin"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xaki4"]
+resource_name = "spin_loop"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvwqi"]
+_data = {
+"RESET": SubResource("Animation_lj3ym"),
+"spin": SubResource("Animation_cug8v"),
+"spin_loop": SubResource("Animation_xaki4")
+}
+
+[node name="Highstepper" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.93076)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_5od5n")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u347e")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hvwqi")
+}
