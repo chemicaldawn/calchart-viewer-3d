@@ -5,8 +5,9 @@ var camera : Camera3D = $"../../World/Camera"
 @onready
 var agent_director = $"../Agent Director"
 
-var speed_scalar = 30
+var speed_scalar = 20
 var angular_scalar = 0.001
+var camera_floor = 5
 
 var camera_mode : CalChart.CAMERA_MODE = CalChart.CAMERA_MODE.FREE
 var mouse_locked = false
@@ -45,13 +46,20 @@ func _process(delta):
 		
 		camera.position.y += vertical_scalar * speed_scalar * delta
 		
+		if(camera.position.y < camera_floor):
+			camera.position.y = camera_floor
+		
 	if (camera_mode == CalChart.CAMERA_MODE.FIRSTPERSON):
-		camera.position = agent_director.highlighted_agent.position + Vector3(0,1.7,0)
-		camera.rotation = agent_director.highlighted_agent.rotation
+		camera.position = agent_director.highlighted_agent.position + Vector3(0,1.5,0)
+		#camera.rotation = agent_director.highlighted_agent.rotation
+	
+	if (camera_mode == CalChart.CAMERA_MODE.THIRDPERSON):
+		camera.position = agent_director.highlighted_agent.position + Vector3(0,3,0)
+		camera.position -= Vector3(0,0,-2).rotated(Vector3(0,1,0),camera.rotation.y)
 	
 func _input(event):
 	if(mouse_locked):
-		if((camera_mode == CalChart.CAMERA_MODE.FREE) || (camera_mode == CalChart.CAMERA_MODE.SPECTATOR) || (camera_mode == CalChart.CAMERA_MODE.FIRSTPERSON)):
+		if((camera_mode == CalChart.CAMERA_MODE.FREE) || (camera_mode == CalChart.CAMERA_MODE.SPECTATOR) || (camera_mode == CalChart.CAMERA_MODE.FIRSTPERSON) || (camera_mode == CalChart.CAMERA_MODE.THIRDPERSON)):
 			if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 				camera.rotation.x -= event.relative.y * angular_scalar
 				camera.rotation.y -= event.relative.x * angular_scalar
@@ -74,9 +82,6 @@ func change_mode(mode : CalChart.CAMERA_MODE):
 	if(camera_mode == CalChart.CAMERA_MODE.FREE):
 		free_view_position = camera.position
 		free_view_rotation = camera.rotation
-		
-		print(free_view_position)
-		print(free_view_rotation)
 	
 	match mode:
 		

@@ -36,5 +36,4 @@ func _on_slider_value_changed(value):
 
 func load_slider_timestamp():
 	agent_director.current_timestamp.beat = int(slider.value)
-	print(int(slider.value))
 	agent_director.load_timestamp(agent_director.current_timestamp)

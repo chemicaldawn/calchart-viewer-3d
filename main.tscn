@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://cqke1inx24x7"]
+[gd_scene load_steps=64 format=3 uid="uid://cqke1inx24x7"]
 
 [ext_resource type="Script" path="res://meta.gd" id="1_0agni"]
 [ext_resource type="Theme" uid="uid://rkuq07yx7uwt" path="res://ui/ui.tres" id="4_5a274"]
 [ext_resource type="Script" path="res://ui/scripts/ui.gd" id="6_f0bum"]
 [ext_resource type="Script" path="res://director/loader.gd" id="6_inifb"]
 [ext_resource type="Texture2D" uid="uid://bki3g7giotk5d" path="res://ui/textures/highstepper.png" id="7_84ki6"]
+[ext_resource type="Script" path="res://ui/scripts/title_bar.gd" id="7_fthb2"]
 [ext_resource type="Script" path="res://ui/scripts/view_options.gd" id="8_rvqg6"]
 [ext_resource type="Script" path="res://ui/scripts/camera_button.gd" id="9_87rpc"]
 [ext_resource type="Texture2D" uid="uid://ct6gxwc6yfis8" path="res://ui/textures/wing.png" id="10_sfkij"]
@@ -14,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dyavtdo23l53x" path="res://ui/textures/bone.png" id="13_22mpu"]
 [ext_resource type="Texture2D" uid="uid://sbcbchcxc27" path="res://ui/textures/head.png" id="14_wqk1x"]
 [ext_resource type="Texture2D" uid="uid://bal26t6lpaaeh" path="res://ui/textures/simulator.png" id="15_ipkdy"]
-[ext_resource type="Shader" path="res://ui/shaders/circle.gdshader" id="17_gu7m6"]
 [ext_resource type="Texture2D" uid="uid://boxhrwr2cegun" path="res://ui/textures/play.png" id="18_53c3i"]
 [ext_resource type="Texture2D" uid="uid://kmgyrtcfx16h" path="res://ui/textures/skip_forward.png" id="19_6a6cn"]
 [ext_resource type="Texture2D" uid="uid://egpa4gfy53l6" path="res://ui/textures/pause.png" id="19_hno2s"]
@@ -28,9 +28,16 @@
 [ext_resource type="Sky" uid="uid://dj8gccn3lqtx0" path="res://world/sky/night/sky.tres" id="22_flpr6"]
 [ext_resource type="PackedScene" uid="uid://x4x7q40mu4wq" path="res://world/models/highstepper.tscn" id="22_xfbvy"]
 
+[sub_resource type="FontVariation" id="FontVariation_6fo6s"]
+variation_transform = Transform2D(1, 0, 0, 2, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_77ow8"]
+font = SubResource("FontVariation_6fo6s")
+font_size = 24
+
 [sub_resource type="FontVariation" id="FontVariation_wostj"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_f23hy"]
+[sub_resource type="LabelSettings" id="LabelSettings_kut85"]
 font = SubResource("FontVariation_wostj")
 font_size = 43
 outline_size = 2
@@ -41,6 +48,240 @@ outline_size = 2
 font = SubResource("FontVariation_hwhbm")
 font_size = 20
 
+[sub_resource type="LabelSettings" id="LabelSettings_aaogj"]
+font = SubResource("FontVariation_wostj")
+font_size = 36
+
+[sub_resource type="Animation" id="Animation_sy72d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Show Name:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(124, 20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Year:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(122, 73)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Highstepper:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(38, 21)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Highstepper:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Year:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.623529)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Show Name:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Back Arrow:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(22, 49)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Back:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 33)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Back:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3oqdq"]
+resource_name = "back_button_slide"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Show Name:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Vector2(124, 20), Vector2(80, 20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Year:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Vector2(122, 73), Vector2(80, 73)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Highstepper:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Vector2(38, 21), Vector2(-2, 21)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Highstepper:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Year:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.698039), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Show Name:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Back Arrow:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1.7411, 1),
+"update": 0,
+"values": [Vector2(22, 49), Vector2(35, 49)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Back:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.13, 0.3),
+"transitions": PackedFloat32Array(1.46409, 1),
+"update": 0,
+"values": [Vector2(45, 33), Vector2(80, 33)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("UI/Viewer Controls/Toolbar/Title Bar/Back:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.13, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kxpsi"]
+_data = {
+"RESET": SubResource("Animation_sy72d"),
+"back_button_slide": SubResource("Animation_3oqdq")
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_1mtp0"]
 line_spacing = -7.0
 
@@ -48,8 +289,13 @@ line_spacing = -7.0
 font = SubResource("FontVariation_hwhbm")
 font_size = 30
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxmka"]
-shader = ExtResource("17_gu7m6")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cim87"]
+bg_color = Color(0.0941176, 0.0980392, 0.113725, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6x0gk"]
 content_margin_left = 4.0
@@ -57,13 +303,25 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(0.0941176, 0.0980392, 0.113725, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 corner_detail = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5fqu"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlrpm"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id="Animation_n17o5"]
 length = 0.001
@@ -240,6 +498,20 @@ _data = {
 "slide_out": SubResource("Animation_2dfly")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osiiv"]
+bg_color = Color(0.0941176, 0.0980392, 0.113725, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lisob"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
 [sub_resource type="LabelSettings" id="LabelSettings_xwrag"]
 font_size = 24
 
@@ -318,6 +590,58 @@ tracks/3/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Content/Show List:mouse_filter")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Content/Highstepper Button:mouse_filter")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Content/Show List:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mo0km"]
+resource_name = "show_fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Content/Show List:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.406126, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_orhoi"]
 resource_name = "transition"
@@ -370,10 +694,35 @@ tracks/3/keys = {
 "update": 0,
 "values": [1.0, 0.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Content/Show List:mouse_filter")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Content/Highstepper Button:mouse_filter")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eo7hj"]
 _data = {
 "RESET": SubResource("Animation_32g33"),
+"show_fade": SubResource("Animation_mo0km"),
 "transition": SubResource("Animation_orhoi")
 }
 
@@ -395,8 +744,14 @@ metadata/_edit_horizontal_guides_ = [120.0]
 [node name="Loader" type="Node" parent="Director"]
 script = ExtResource("6_inifb")
 
-[node name="Network" type="HTTPRequest" parent="Director"]
+[node name="Network" type="Node" parent="Director"]
 script = ExtResource("12_1ifd6")
+
+[node name="List Request" type="HTTPRequest" parent="Director/Network"]
+
+[node name="Show Request" type="HTTPRequest" parent="Director/Network"]
+
+[node name="Audio Request" type="HTTPRequest" parent="Director/Network"]
 
 [node name="Agent Director" type="Node" parent="Director"]
 script = ExtResource("21_h38bp")
@@ -440,34 +795,66 @@ color = Color(0.160784, 0.168627, 0.192157, 1)
 
 [node name="Title Bar" type="Control" parent="UI/Viewer Controls/Toolbar"]
 anchors_preset = 0
+script = ExtResource("7_fthb2")
+
+[node name="Back Arrow" type="Label" parent="UI/Viewer Controls/Toolbar/Title Bar"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 49.0
+offset_right = 62.0
+offset_bottom = 86.0
+text = "<"
+label_settings = SubResource("LabelSettings_77ow8")
 
 [node name="Show Name" type="Label" parent="UI/Viewer Controls/Toolbar/Title Bar"]
 layout_mode = 0
-offset_left = 95.0
+offset_left = 124.0
 offset_top = 20.0
-offset_right = 343.0
+offset_right = 372.0
 offset_bottom = 82.0
 text = "Show Name"
-label_settings = SubResource("LabelSettings_f23hy")
+label_settings = SubResource("LabelSettings_kut85")
 
 [node name="Year" type="Label" parent="UI/Viewer Controls/Toolbar/Title Bar"]
 modulate = Color(1, 1, 1, 0.623529)
 layout_mode = 0
-offset_left = 93.0
+offset_left = 122.0
 offset_top = 73.0
-offset_right = 296.0
+offset_right = 325.0
 offset_bottom = 115.0
 text = "2023"
 label_settings = SubResource("LabelSettings_8j0sq")
 
 [node name="Highstepper" type="TextureRect" parent="UI/Viewer Controls/Toolbar/Title Bar"]
 layout_mode = 0
-offset_left = 9.0
+offset_left = 38.0
 offset_top = 21.0
-offset_right = 85.0
+offset_right = 114.0
 offset_bottom = 97.0
 texture = ExtResource("7_84ki6")
 expand_mode = 1
+
+[node name="Back" type="Label" parent="UI/Viewer Controls/Toolbar/Title Bar"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 33.0
+offset_right = 414.0
+offset_bottom = 86.0
+text = "Back to Main Menu"
+label_settings = SubResource("LabelSettings_aaogj")
+
+[node name="Back Button" type="TextureButton" parent="UI/Viewer Controls/Toolbar/Title Bar"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 120.0
+mouse_default_cursor_shape = 2
+
+[node name="Title Bar Animator" type="AnimationPlayer" parent="UI/Viewer Controls/Toolbar/Title Bar"]
+root_node = NodePath("../../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_kxpsi")
+}
 
 [node name="View Options" type="HBoxContainer" parent="UI/Viewer Controls/Toolbar"]
 layout_mode = 1
@@ -747,26 +1134,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="ColorRect" parent="UI/Viewer Controls/Navbar/Controls"]
-material = SubResource("ShaderMaterial_lxmka")
+[node name="Play" type="Panel" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -60.0
-offset_right = 60.0
-color = Color(0.0941176, 0.0980392, 0.113725, 1)
+offset_left = -45.0
+offset_top = 15.0
+offset_right = 45.0
+offset_bottom = -15.0
+theme = ExtResource("4_5a274")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cim87")
 
 [node name="Play Icon" type="TextureRect" parent="UI/Viewer Controls/Navbar/Controls/Play"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 37.5
-offset_top = 37.5
-offset_right = -37.5
-offset_bottom = -37.5
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("18_53c3i")
@@ -778,14 +1167,27 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 37.5
-offset_top = 37.5
-offset_right = -37.5
-offset_bottom = -37.5
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_hno2s")
 expand_mode = 1
+
+[node name="Play Button" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls/Play"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+mouse_default_cursor_shape = 2
 
 [node name="Step Forward" type="TextureButton" parent="UI/Viewer Controls/Navbar/Controls"]
 layout_mode = 1
@@ -847,12 +1249,14 @@ stretch_mode = 0
 
 [node name="Volume" type="Control" parent="UI/Viewer Controls/Navbar"]
 layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 279.0
 offset_top = -120.0
 offset_right = 279.0
 grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Volume Slider" type="HSlider" parent="UI/Viewer Controls/Navbar/Volume"]
 layout_mode = 0
@@ -903,18 +1307,19 @@ libraries = {
 "": SubResource("AnimationLibrary_xsdqm")
 }
 
-[node name="Button" type="ColorRect" parent="UI/Tab Menu/Background"]
+[node name="Button" type="Panel" parent="UI/Tab Menu/Background"]
 layout_mode = 0
 offset_left = -60.0
 offset_bottom = 60.0
-color = Color(0.0941176, 0.0980392, 0.113725, 1)
+theme = ExtResource("4_5a274")
+theme_override_styles/panel = SubResource("StyleBoxFlat_osiiv")
 
 [node name="TextureButton" type="TextureButton" parent="UI/Tab Menu/Background/Button"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 51.0
+offset_bottom = 51.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("21_dywut")
 ignore_texture_size = true
@@ -937,11 +1342,13 @@ layout_mode = 2
 theme = ExtResource("4_5a274")
 text = "Settings"
 
-[node name="Selector" type="ColorRect" parent="UI/Tab Menu/Background"]
+[node name="Selector" type="Panel" parent="UI/Tab Menu/Background"]
 layout_mode = 0
 offset_top = 60.0
 offset_right = 240.0
 offset_bottom = 64.0
+theme = ExtResource("4_5a274")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lisob")
 
 [node name="Scene Options" type="VBoxContainer" parent="UI/Tab Menu/Background"]
 layout_mode = 1
@@ -1097,6 +1504,15 @@ text = "Loading shows..."
 label_settings = SubResource("LabelSettings_4mjcl")
 horizontal_alignment = 1
 
+[node name="Show Panel" type="Panel" parent="UI/Main Menu/Content"]
+layout_mode = 0
+offset_left = -245.0
+offset_top = 40.0
+offset_right = 245.0
+offset_bottom = 370.0
+mouse_filter = 2
+theme = ExtResource("4_5a274")
+
 [node name="Show List" type="ItemList" parent="UI/Main Menu/Content"]
 layout_mode = 0
 offset_left = -240.0
@@ -1112,6 +1528,7 @@ offset_left = -150.0
 offset_top = -386.0
 offset_right = 150.0
 offset_bottom = -86.0
+mouse_filter = 2
 stretch = true
 
 [node name="Highstepper Viewport" type="SubViewport" parent="UI/Main Menu/Content/Highstepper Container"]
@@ -1163,10 +1580,17 @@ spot_attenuation = 0.6
 spot_angle = 63.53
 spot_angle_attenuation = 0.120742
 
+[connection signal="request_completed" from="Director/Network/List Request" to="Director/Network" method="_on_list_request_request_completed"]
+[connection signal="request_completed" from="Director/Network/Show Request" to="Director/Network" method="_on_show_request_request_completed"]
+[connection signal="request_completed" from="Director/Network/Audio Request" to="Director/Network" method="_on_audio_request_request_completed"]
 [connection signal="pressed" from="UI/Focus Detector" to="Director/Movement Controller" method="_on_focus_detector_pressed"]
+[connection signal="mouse_entered" from="UI/Viewer Controls/Toolbar/Title Bar/Back Button" to="UI/Viewer Controls/Toolbar/Title Bar" method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Viewer Controls/Toolbar/Title Bar/Back Button" to="UI/Viewer Controls/Toolbar/Title Bar" method="_on_back_button_mouse_exited"]
+[connection signal="pressed" from="UI/Viewer Controls/Toolbar/Title Bar/Back Button" to="UI/Viewer Controls/Toolbar/Title Bar" method="_on_back_button_pressed"]
 [connection signal="drag_ended" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_ended"]
 [connection signal="drag_started" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_drag_started"]
 [connection signal="value_changed" from="UI/Viewer Controls/Navbar/Scrubber/Slider" to="UI" method="_on_slider_value_changed"]
+[connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Play/Play Button" to="Director/Agent Director" method="_on_play_button_pressed"]
 [connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Step Forward" to="Director/Agent Director" method="_on_step_forward_pressed"]
 [connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Step Backward" to="Director/Agent Director" method="_on_step_backward_pressed"]
 [connection signal="pressed" from="UI/Viewer Controls/Navbar/Controls/Skip Backward" to="Director/Agent Director" method="_on_skip_backward_pressed"]
@@ -1177,6 +1601,6 @@ spot_angle_attenuation = 0.120742
 [connection signal="item_selected" from="UI/Tab Menu/Background/Scene Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="UI/Tab Menu/Background/Scene Options/Highlight/OptionButton" to="UI/Viewer Controls/Toolbar/View Options" method="_on_option_button_item_selected"]
 [connection signal="text_changed" from="UI/Tab Menu/Background/Settings Options/Scale/LineEdit" to="UI/Tab Menu/Background" method="_on_line_edit_text_changed"]
-[connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="Director/Network" method="_on_show_list_item_selected"]
 [connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="UI/Main Menu" method="_on_show_list_item_selected"]
+[connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="Director/Network" method="_on_show_list_item_selected"]
 [connection signal="pressed" from="UI/Main Menu/Content/Highstepper Button" to="UI/Main Menu" method="_on_highstepper_button_pressed"]

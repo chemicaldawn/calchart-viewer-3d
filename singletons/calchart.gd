@@ -78,7 +78,6 @@ class Show:
 			sheet_index += 1
 			
 	func get_seconds_elapsed(timestamp: MusicTimestamp):
-		print(len(rendered_beatsheet))
 		return rendered_beatsheet[timestamp.beat] + (float(beatsheet[timestamp.beat + 1])/1000.0) * timestamp.subbeat
 		
 	func get_seconds_elapsed_from_int(beat : int):

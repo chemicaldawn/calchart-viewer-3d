@@ -54,11 +54,3 @@ func _on_line_edit_text_changed(new_text):
 	
 	for child in $"../../../World/Agents".get_children():
 		child.scale = (Vector3.ONE * scale)
-
-func _on_accessibility_list_multi_selected(index, selected):
-	
-	print(selected)
-	
-	match index:
-		1:
-			audio_player.stream = carefree

@@ -1,7 +1,14 @@
-extends HTTPRequest
+extends Node
 
 @onready
 var loader = $"../Loader"
+
+@onready
+var list_request = $"List Request"
+@onready
+var show_request = $"Show Request"
+@onready
+var audio_request = $"Audio Request"
 
 @onready
 var show_list: ItemList = $"../../UI/Main Menu/Content/Show List"
@@ -14,66 +21,56 @@ var shows = {}
 var audio_url = ""
 
 func _ready():
-	request_completed.connect(_on_request_completed)
-	
-	request("https://calchart-server.herokuapp.com/list/")
-	
-func _on_request_completed(result, response_code, headers, body):
-	
-	print(body.get_string_from_utf8())
-	print(headers)
-	
-	var content_type = "unknown"
-	
-	for header in headers:
-		if("Content-Type" in header):
-			content_type = header.split(" ")[1] 
-			
-		if("content-type" in header):
-			content_type = header.split(":")[1] 
-	
-	print(content_type)
-	
-	match content_type:
-		
-		"application/json":
-			var json = JSON.parse_string(body.get_string_from_utf8())
-
-			# assume shows list
-			if(json.has("shows")):
-				
-				shows = json["shows"]
-				for show in shows:
-					
-					show_list.add_item(show["name"])
-					
-				info.text = "Select a show from the list below."
-			
-			# assume show
-			elif(json.has("viewer")):
-				info.text = "Populating field..."
-				
-				audio_url = json["audio"]
-				
-				set_download_file("user://audio.mp3")
-				request(audio_url)
-				
-				loader.load_show(json)
-				$"../../UI/Main Menu/Main Menu Animator".play("transition")
-				
-		"audio/mpeg":
-			
-			var audio_file = FileAccess.open("user://audio.mp3", FileAccess.READ)
-			var sound = AudioStreamMP3.new()
-			sound.data = audio_file.get_buffer(audio_file.get_length())
-			
-			audio_player.stream = sound
+	Logger.info("NETWORK","Requesting shows list...")
+	list_request.request("https://calchart-server.herokuapp.com/list/")
 
 func _on_show_list_item_selected(index):
 	
 	var selected_show = shows[index]["slug"]
 	show_list.mouse_filter = show_list.MOUSE_FILTER_IGNORE
 	
-	request("https://calchart-server.herokuapp.com/get/" + selected_show + "/")
+	Logger.info("NETWORK","Requesting " + shows[index]["name"] + "...")
+	show_request.request("https://calchart-server.herokuapp.com/get/" + selected_show + "/")
 	
 	info.text = "Downloading " + shows[index]["name"] + "..."
+
+
+func _on_list_request_request_completed(result, response_code, headers, body):
+	
+	Logger.info("NETWORK","Shows list recieved.")
+	
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	shows = json["shows"]
+	
+	for show in shows:
+		show_list.add_item(show["name"])
+			
+	info.text = "Select a show from the list below."
+	$"../../UI/Main Menu/Main Menu Animator".play("show_fade")
+
+func _on_show_request_request_completed(result, response_code, headers, body):
+	
+	Logger.info("NETWORK","Show recieved.")
+	
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	info.text = "Populating field..."
+				
+	audio_url = json["audio"]
+	
+	Logger.info("NETWORK","Requesting show audio file...")
+	audio_request.set_download_file("user://audio.mp3")
+	audio_request.request(audio_url)
+	
+	loader.load_show(json)
+	$"../../UI/Main Menu/Main Menu Animator".play("transition")
+
+
+func _on_audio_request_request_completed(result, response_code, headers, body):
+	
+	Logger.info("NETWORK","Audio recieved.")
+	
+	var audio_file = FileAccess.open("user://audio.mp3", FileAccess.READ)
+	var sound = AudioStreamMP3.new()
+	sound.data = audio_file.get_buffer(audio_file.get_length())
+	
+	audio_player.stream = sound

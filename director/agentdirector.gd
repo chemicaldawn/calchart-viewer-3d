@@ -175,3 +175,7 @@ func _on_option_button_item_selected(index):
 	deselect_all_agents()
 	highlighted_agent = agent_container.get_node(dot)
 	highlighted_agent.select()
+
+
+func _on_play_button_pressed():
+	toggle_active_playback()

@@ -7,6 +7,8 @@ var agent_director = $"../Agent Director"
 @onready
 var agent_container = $"../../World/Agents"
 @onready
+var view_options = $"../../UI/Viewer Controls/Toolbar/View Options"
+@onready
 var show_label = $"../../UI/Viewer Controls/Toolbar/Title Bar/Show Name"
 @onready
 var year_label = $"../../UI/Viewer Controls/Toolbar/Title Bar/Year"
@@ -37,6 +39,7 @@ func create_show_objects(data: Dictionary, beat_data : String):
 	year_label.text = show.year
 	
 	var stuntsheet_index = 0
+	var total_stuntsheet_beats = 0
 	
 	for stuntsheet in data["sheets"]:
 		
@@ -47,11 +50,19 @@ func create_show_objects(data: Dictionary, beat_data : String):
 		show.sheets.append(sheet_object)
 		
 		stuntsheet_index += 1
+		total_stuntsheet_beats += stuntsheet["beats"]
 		
 	show.beatsheet = load_beatsheet(beat_data)
 	show.rendered_beatsheet = render_beatsheet(show.beatsheet)
 	
-	var total_beats = len(show.rendered_beatsheet) - 2
+	var total_beatsheet_beats = len(show.rendered_beatsheet) - 2
+	var total_beats = 0
+	
+	if(total_beatsheet_beats <= total_stuntsheet_beats):
+		total_beats = total_beatsheet_beats
+		
+	if(total_stuntsheet_beats < total_beatsheet_beats):
+		total_beats = total_stuntsheet_beats
 	
 	show.total_beats = total_beats
 	slider.max_value = total_beats
@@ -167,3 +178,13 @@ func render_beatsheet(beatsheet : Array):
 			rendered_beatsheet[i] += float(beatsheet[j])/1000.0
 
 	return rendered_beatsheet
+	
+func reset():
+	for child in agent_container.get_children():
+		child.reparent(null)
+		child.queue_free()
+		
+	slider.value = 1
+		
+	agent_director.highlighted_agent = null
+	view_options.agent_deselected()
