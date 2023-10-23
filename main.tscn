@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cqke1inx24x7"]
+[gd_scene load_steps=55 format=3 uid="uid://cqke1inx24x7"]
 
 [ext_resource type="Script" path="res://meta.gd" id="1_0agni"]
 [ext_resource type="Theme" uid="uid://rkuq07yx7uwt" path="res://ui/ui.tres" id="4_5a274"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://egpa4gfy53l6" path="res://ui/textures/pause.png" id="19_hno2s"]
 [ext_resource type="Script" path="res://ui/scripts/tab_menu.gd" id="20_ork4b"]
 [ext_resource type="Texture2D" uid="uid://cld2872o0eij" path="res://ui/textures/menu.png" id="21_dywut"]
+[ext_resource type="Texture2D" uid="uid://djw7hume1c2eo" path="res://ui/textures/volume.png" id="21_fcxeh"]
 [ext_resource type="Script" path="res://director/agentdirector.gd" id="21_h38bp"]
 [ext_resource type="Script" path="res://director/movementcontroller.gd" id="22_1bkpa"]
 [ext_resource type="Material" uid="uid://bq5qyfa2p4gjx" path="res://world/shaders/field_defilter.material" id="22_6h8ki"]
@@ -49,6 +50,20 @@ font_size = 30
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lxmka"]
 shader = ExtResource("17_gu7m6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6x0gk"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0941176, 0.0980392, 0.113725, 1)
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5fqu"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlrpm"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_n17o5"]
 length = 0.001
@@ -830,6 +845,37 @@ texture_normal = ExtResource("19_6a6cn")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="Volume" type="Control" parent="UI/Viewer Controls/Navbar"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 279.0
+offset_top = -120.0
+offset_right = 279.0
+grow_horizontal = 0
+
+[node name="Volume Slider" type="HSlider" parent="UI/Viewer Controls/Navbar/Volume"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 50.0
+offset_right = 260.0
+offset_bottom = 70.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_5a274")
+theme_override_styles/slider = SubResource("StyleBoxFlat_6x0gk")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_o5fqu")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_mlrpm")
+value = 70.0
+rounded = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Viewer Controls/Navbar/Volume"]
+layout_mode = 0
+offset_top = 37.0
+offset_right = 46.0
+offset_bottom = 83.0
+texture = ExtResource("21_fcxeh")
+expand_mode = 1
+
 [node name="Tab Menu" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 11
@@ -1095,6 +1141,7 @@ libraries = {
 environment = SubResource("Environment_8aip2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="World"]
+volume_db = -80.0
 
 [node name="Agents" type="Node3D" parent="World"]
 

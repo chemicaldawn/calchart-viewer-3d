@@ -4,9 +4,17 @@ extends Control
 var agent_director = $"../Director/Agent Director"
 @onready
 var slider = $"Viewer Controls/Navbar/Scrubber/Slider"
+@onready
+var audio : AudioStreamPlayer = $"../World/AudioStreamPlayer"
+@onready
+var volume_slider = $"Viewer Controls/Navbar/Volume/Volume Slider"
 
 var input = false
 var restore_active_playback = false
+
+func _process(delta):
+	# logarithmically accurate volume slider wow so sexy
+	audio.volume_db = (43*(log(volume_slider.value + 1)/log(10)) - 80)
 
 func _on_slider_drag_started():
 	
