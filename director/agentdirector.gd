@@ -6,6 +6,7 @@ var current_timestamp = CalChart.MusicTimestamp.new()
 func multiplier_from_beat(beat : int): return (1/(current_show.beatsheet[beat]/1000))
 
 var active_playback = false
+var choppy_playback = false
 var is_audio_loaded = false
 
 var highlighted_agent : Node3D = null
@@ -38,8 +39,9 @@ func play():
 	
 	for agent in agent_container.get_children():
 		
-		agent.get_node("Animator").seek(time)
-		agent.get_node("Animator").play()
+		if(!choppy_playback):
+			agent.get_node("Animator").seek(time)
+			agent.get_node("Animator").play()
 		
 	audio_player.play(float(time))
 	
@@ -58,15 +60,16 @@ func stop():
 		
 	active_playback = false
 
-func load_timestamp(timestamp : CalChart.MusicTimestamp, sync = false, update_slider = false):
+func load_timestamp(timestamp : CalChart.MusicTimestamp, sync = false, update_slider = false, exclude_agents = false):
 	
 	current_timestamp = timestamp.normalize(current_show)
 	var time = current_show.get_seconds_elapsed(current_timestamp)
 	
-	for agent in agent_container.get_children():
-		
-		var animator : AnimationPlayer = agent.get_node("Animator")
-		animator.seek(time,true)
+	if(!exclude_agents):
+		for agent in agent_container.get_children():
+			
+			var animator : AnimationPlayer = agent.get_node("Animator")
+			animator.seek(time,true)
 		
 	update_navbar(timestamp)
 	
@@ -120,7 +123,10 @@ func _process(delta):
 			current_timestamp.beat += 1
 			current_timestamp.subbeat -= 1
 			
-		load_timestamp(current_timestamp)
+			if(choppy_playback):
+				load_timestamp(current_timestamp,false,false,false)
+			
+		load_timestamp(current_timestamp,false,false,true)
 		update_slider()
 		
 

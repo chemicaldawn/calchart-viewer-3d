@@ -1,6 +1,7 @@
-[gd_scene load_steps=64 format=3 uid="uid://cqke1inx24x7"]
+[gd_scene load_steps=69 format=3 uid="uid://cqke1inx24x7"]
 
 [ext_resource type="Script" path="res://meta.gd" id="1_0agni"]
+[ext_resource type="Script" path="res://director/configuration.gd" id="2_53cfp"]
 [ext_resource type="Theme" uid="uid://rkuq07yx7uwt" path="res://ui/ui.tres" id="4_5a274"]
 [ext_resource type="Script" path="res://ui/scripts/ui.gd" id="6_f0bum"]
 [ext_resource type="Script" path="res://director/loader.gd" id="6_inifb"]
@@ -27,6 +28,120 @@
 [ext_resource type="Script" path="res://ui/scripts/main_menu.gd" id="22_7q36i"]
 [ext_resource type="Sky" uid="uid://dj8gccn3lqtx0" path="res://world/sky/night/sky.tres" id="22_flpr6"]
 [ext_resource type="PackedScene" uid="uid://x4x7q40mu4wq" path="res://world/models/highstepper.tscn" id="22_xfbvy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5gfw"]
+bg_color = Color(0.498039, 0.619608, 0.678431, 0)
+border_color = Color(0.494118, 0.615686, 0.678431, 0.6)
+
+[sub_resource type="Animation" id="Animation_pe8o5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5j1ul"]
+resource_name = "focus"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Focus Indicator:theme_override_styles/panel:border_width_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1xetl"]
+_data = {
+"RESET": SubResource("Animation_pe8o5"),
+"focus": SubResource("Animation_5j1ul")
+}
 
 [sub_resource type="FontVariation" id="FontVariation_6fo6s"]
 variation_transform = Transform2D(1, 0, 0, 2, 0, 0)
@@ -741,6 +856,9 @@ metadata/_edit_horizontal_guides_ = [120.0]
 
 [node name="Director" type="Node" parent="."]
 
+[node name="Configuration" type="Node" parent="Director"]
+script = ExtResource("2_53cfp")
+
 [node name="Loader" type="Node" parent="Director"]
 script = ExtResource("6_inifb")
 
@@ -776,6 +894,21 @@ anchor_bottom = 0.994
 offset_right = 1.91992
 offset_bottom = 6.47998
 action_mode = 0
+
+[node name="Focus Indicator" type="Panel" parent="UI/Focus Detector"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+offset_bottom = -128.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_a5gfw")
+
+[node name="Focus Indicator Animator" type="AnimationPlayer" parent="UI/Focus Detector"]
+libraries = {
+"": SubResource("AnimationLibrary_1xetl")
+}
 
 [node name="Viewer Controls" type="Control" parent="UI"]
 layout_mode = 1
@@ -1601,6 +1734,6 @@ spot_angle_attenuation = 0.120742
 [connection signal="item_selected" from="UI/Tab Menu/Background/Scene Options/Highlight/OptionButton" to="Director/Agent Director" method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="UI/Tab Menu/Background/Scene Options/Highlight/OptionButton" to="UI/Viewer Controls/Toolbar/View Options" method="_on_option_button_item_selected"]
 [connection signal="text_changed" from="UI/Tab Menu/Background/Settings Options/Scale/LineEdit" to="UI/Tab Menu/Background" method="_on_line_edit_text_changed"]
-[connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="UI/Main Menu" method="_on_show_list_item_selected"]
 [connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="Director/Network" method="_on_show_list_item_selected"]
+[connection signal="item_selected" from="UI/Main Menu/Content/Show List" to="UI/Main Menu" method="_on_show_list_item_selected"]
 [connection signal="pressed" from="UI/Main Menu/Content/Highstepper Button" to="UI/Main Menu" method="_on_highstepper_button_pressed"]

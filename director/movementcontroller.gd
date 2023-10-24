@@ -17,6 +17,9 @@ var free_view_position : Vector3 = camera.position
 @onready
 var free_view_rotation : Vector3 = camera.rotation
 
+@onready
+var focus_indicator_animator = $"../../UI/Focus Detector/Focus Indicator Animator"
+
 func _process(delta):
 	
 	# free camera movement processing
@@ -65,14 +68,24 @@ func _input(event):
 				camera.rotation.y -= event.relative.x * angular_scalar
 			
 		if(Input.is_action_just_pressed("Break Cursor")):
+			break_focus()
 			
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			mouse_locked = false
 	
 # when main window is clicked
 func _on_focus_detector_pressed():
+	focus()
+	
+func focus():
 	mouse_locked = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	focus_indicator_animator.play("focus")
+	
+func break_focus():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	mouse_locked = false
+	
+	focus_indicator_animator.play_backwards("focus")
 
 func change_mode(mode : CalChart.CAMERA_MODE):
 	
