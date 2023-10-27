@@ -57,11 +57,16 @@ func _on_show_request_request_completed(result, response_code, headers, body):
 				
 	audio_url = json["audio"]
 	
+	Logger.info("NETWORK","Cancelling any previous audio requests...")
+	audio_request.cancel_request()
+	audio_player.stream = null
+	
 	Logger.info("NETWORK","Requesting show audio file...")
 	audio_request.set_download_file("user://audio.mp3")
 	audio_request.request(audio_url)
 	
 	loader.load_show(json)
+	show_list.focus_mode = Control.FOCUS_NONE
 	$"../../UI/Main Menu/Main Menu Animator".play("transition")
 
 

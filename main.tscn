@@ -32,6 +32,10 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5gfw"]
 bg_color = Color(0.498039, 0.619608, 0.678431, 0)
 border_color = Color(0.494118, 0.615686, 0.678431, 0.6)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="Animation" id="Animation_pe8o5"]
 length = 0.001
@@ -850,6 +854,7 @@ size = Vector2(160, 84)
 
 [node name="CalChartViewer3D" type="Node"]
 script = ExtResource("1_0agni")
+version_number = Vector3(1, 0, 2)
 release_type = 1
 credits = PackedStringArray("")
 metadata/_edit_horizontal_guides_ = [120.0]
@@ -901,7 +906,6 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 120.0
-offset_bottom = -128.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_a5gfw")
 

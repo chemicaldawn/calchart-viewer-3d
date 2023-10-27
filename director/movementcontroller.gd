@@ -22,6 +22,10 @@ var focus_indicator_animator = $"../../UI/Focus Detector/Focus Indicator Animato
 
 func _process(delta):
 	
+	# focus fix for chromium-based browsers
+	if(mouse_locked && (Input.get_mouse_mode() == 0)):
+		break_focus()
+	
 	# free camera movement processing
 	if (camera_mode == CalChart.CAMERA_MODE.FREE) and (mouse_locked == true):
 		var planar_vector = Vector2.ZERO
